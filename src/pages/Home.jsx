@@ -7,7 +7,7 @@ const client = Prismic.client(apiEndpoint);
 
 const Home = () => {
     const [prismicData, setPrismicData] = useState({
-        homeDoc: null,
+        home: null,
         newsPost: null,
         textPosts: null,
         stores: null,
@@ -16,7 +16,7 @@ const Home = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const homeDoc = await client.getSingle('homepage');
+                const home = await client.getSingle('homepage');
                 const newsPost = await client.query(
                     Prismic.Predicates.at('document.type', 'news_post'),
                     {
@@ -43,7 +43,7 @@ const Home = () => {
                 if (stores) {
                     setPrismicData(
                         {
-                            homeDoc,
+                            home,
                             newsPost: newsPost.results,
                             stores: stores.results,
                             textPosts: textPosts.results,
@@ -65,7 +65,7 @@ const Home = () => {
     }, []);
 
     if (prismicData.stores) {
-        const homeDoc = prismicData.homeDoc.data;
+        const home = prismicData.home.data;
         const newsPost = prismicData.newsPost[0];
         const { stores } = prismicData;
         const { textPosts } = prismicData;
@@ -75,9 +75,9 @@ const Home = () => {
                 { prismicData ? (
                     <>
                         <div>
-                            <img alt="" src={ homeDoc.image.url } />
+                            <img alt="" src={ home.image.url } />
                             <RichText
-                                render={ homeDoc.presentation }
+                                render={ home.presentation }
                                 linkResolver={ linkResolver }
                             />
                         </div>
@@ -132,7 +132,7 @@ const Home = () => {
                             )) : null }
                         </div>
                     </>
-                ) : <div>Loading</div> }
+                ) : <div>Not found</div> }
             </>
         );
     }

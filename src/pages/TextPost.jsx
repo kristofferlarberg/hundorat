@@ -6,18 +6,18 @@ import { apiEndpoint, linkResolver } from '../prismic-configuration';
 
 const client = Prismic.client(apiEndpoint);
 
-const NewsPost = ({ match }) => {
-    const [prismicData, setPrismicData] = useState({ newsPost: null });
+const TextPost = ({ match }) => {
+    const [prismicData, setPrismicData] = useState({ textPost: null });
 
     const { uid } = match.params;
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const newsPost = await client.getByUID('news_post', uid);
+                const textPost = await client.getByUID('text_post', uid);
 
-                if (newsPost) {
-                    return setPrismicData(newsPost);
+                if (textPost) {
+                    return setPrismicData(textPost);
                 }
                 return console.warn('Page document not found.');
             }
@@ -25,25 +25,25 @@ const NewsPost = ({ match }) => {
                 return console.log('error');
             }
         };
+
         fetchData();
     }, [uid]);
 
     if (prismicData) {
-        const newsPost = prismicData;
+        const textPost = prismicData.data;
 
         return (
             <>
-                { newsPost.data ? (
+                { textPost ? (
                     <div>
-                        { newsPost.data.image ? (
+                        { textPost.image ? (
                             <>
-                                <img alt="" src={ newsPost.data.image.url } />
-                                <RichText render={ newsPost.data.image_caption } />
+                                <img alt="" src={ textPost.image.url } />
+                                <RichText render={ textPost.image_caption } />
                             </>
                         ) : null }
-                        <RichText render={ newsPost.data.title } />
-                        <p>{ newsPost.first_publication_date }</p>
-                        <RichText render={ newsPost.data.text } linkResolver={ linkResolver } />
+                        <RichText render={ textPost.title } />
+                        <RichText render={ textPost.text } linkResolver={ linkResolver } />
                     </div>
                 ) : <div>Not found</div> }
             </>
@@ -52,4 +52,4 @@ const NewsPost = ({ match }) => {
     return null;
 };
 
-export default NewsPost;
+export default TextPost;
