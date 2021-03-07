@@ -7,7 +7,7 @@ const client = Prismic.client(apiEndpoint);
 
 const Home = () => {
     const [prismicData, setPrismicData] = useState({
-        home: null,
+        homePage: null,
         newsPost: null,
         textPosts: null,
         stores: null,
@@ -16,7 +16,7 @@ const Home = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const home = await client.getSingle('homepage');
+                const homePage = await client.getSingle('homepage');
                 const newsPost = await client.query(
                     Prismic.Predicates.at('document.type', 'news_post'),
                     {
@@ -43,7 +43,7 @@ const Home = () => {
                 if (stores) {
                     setPrismicData(
                         {
-                            home,
+                            homePage,
                             newsPost: newsPost.results,
                             stores: stores.results,
                             textPosts: textPosts.results,
@@ -65,7 +65,7 @@ const Home = () => {
     }, []);
 
     if (prismicData.stores) {
-        const home = prismicData.home.data;
+        const homePage = prismicData.homePage.data;
         const newsPost = prismicData.newsPost[0];
         const { stores } = prismicData;
         const { textPosts } = prismicData;
@@ -75,9 +75,9 @@ const Home = () => {
                 { prismicData ? (
                     <>
                         <div>
-                            <img alt={ home.image.alt } src={ home.image.url } />
+                            <img alt={ homePage.image.alt } src={ homePage.image.url } />
                             <RichText
-                                render={ home.presentation }
+                                render={ homePage.presentation }
                                 linkResolver={ linkResolver }
                             />
                         </div>
