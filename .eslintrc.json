@@ -20,26 +20,21 @@
     "plugins": [
         "react"
     ],
-    "overrides": [
-        {
-            "files": ["**/*.js", "**/*.jsx"],
-            "rules": {
-                "arrow-body-style": ["error", "as-needed"],
-                "arrow-parens": ["error", "as-needed", {"requireForBlockBody": true }],
-                "brace-style": ["error", "stroustrup"],
-                "indent": ["error", 4],
-                "object-curly-spacing": [2, "always"],
-                "react/jsx-curly-spacing": ["error", {
-                    "children": true,
-                    "spacing": {
-                        "objectLiterals": "never"
-                    },
-                    "when": "always"
-                }],
-                "react/jsx-indent": [2, 4],
-                "react/jsx-indent-props": [2, 4],
-                "react/prop-types": "off"
-            }
-        }
-    ]
+    "rules": {
+        "arrow-body-style": ["error", "as-needed"],
+        "arrow-parens": ["error", "as-needed", {"requireForBlockBody": true }],
+        "brace-style": ["error", "stroustrup"],
+        "indent": ["error", 4],
+        "object-curly-spacing": [2, "always"],
+        "react/jsx-curly-spacing": ["error", {
+            "children": true,
+            "spacing": {
+                "objectLiterals": "never"
+            },
+            "when": "always"
+        }],
+        "react/jsx-indent": [2, 4],
+        "react/jsx-indent-props": [2, 4],
+        "react/prop-types": "off"
+    }
 }

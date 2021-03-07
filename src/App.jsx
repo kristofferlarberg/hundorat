@@ -3,7 +3,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import { apiEndpoint } from './prismic-configuration';
-import { SiteLayout } from './components/layout';
+import SiteLayout from './components/layout/SiteLayout';
 import {
     AdditionalActivities,
     Home,
@@ -41,9 +41,9 @@ const App = () => {
                         <Route exact path="/texter" component={ Texts } />
                         <Route exact path="/texter/:uid" component={ TextPost } />
                         <Route exact path="/ytterligare" component={ AdditionalActivities } />
-                        <Route exact path="/:uid" component={ Page } />
-                        <Route component={ NotFound } />
+                        <Route exact path="/pages/:uid" component={ Page } />
                     </SiteLayout>
+                    <Route component={ NotFound } />
                 </Switch>
             </BrowserRouter>
         </>

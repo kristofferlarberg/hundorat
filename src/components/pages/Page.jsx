@@ -34,7 +34,7 @@ const Page = ({ match }) => {
 
     if (prismicData) {
         const page = prismicData.data;
-        console.log(prismicData);
+
         return (
             <>
                 { page ? (

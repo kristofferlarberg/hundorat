@@ -41,7 +41,6 @@ const AdditionalActivities = () => {
         fetchData();
     }, []);
 
-    console.log(prismicData);
     if (prismicData.activities) {
         const activitiesPage = prismicData.activitiesPage.data;
         const { activities } = prismicData;
