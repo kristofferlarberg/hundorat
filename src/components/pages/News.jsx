@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Prismic from '@prismicio/client';
 import { RichText } from 'prismic-reactjs';
-import { apiEndpoint } from '../prismic-configuration';
+import { apiEndpoint } from '../../prismic-configuration';
 
 const client = Prismic.client(apiEndpoint);
 

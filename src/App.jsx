@@ -14,7 +14,7 @@ import {
     Stores,
     Texts,
     TextPost,
-} from './pages';
+} from './components/pages';
 
 const App = () => {
     const repoNameArray = /([^/]+)\.cdn.prismic\.io\/api/.exec(apiEndpoint);

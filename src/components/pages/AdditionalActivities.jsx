@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Prismic from '@prismicio/client';
 import { RichText } from 'prismic-reactjs';
-import { apiEndpoint, linkResolver } from '../prismic-configuration';
+import { apiEndpoint, linkResolver } from '../../prismic-configuration';
 
 const client = Prismic.client(apiEndpoint);
 
@@ -57,7 +57,10 @@ const AdditionalActivities = () => {
                             <div key={ item.id }>
                                 { item.data.image ? (
                                     <>
-                                        <img alt="" src={ item.data.image.url } />
+                                        <img
+                                            alt={ item.data.image.alt }
+                                            src={ item.data.image.url }
+                                        />
                                         <RichText render={ item.data.image_caption } />
                                     </>
                                 ) : null }

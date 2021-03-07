@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Prismic from '@prismicio/client';
 import { RichText } from 'prismic-reactjs';
-import { apiEndpoint, linkResolver } from '../prismic-configuration';
+import { apiEndpoint, linkResolver } from '../../prismic-configuration';
 
 const client = Prismic.client(apiEndpoint);
 
@@ -75,7 +75,7 @@ const Home = () => {
                 { prismicData ? (
                     <>
                         <div>
-                            <img alt="" src={ home.image.url } />
+                            <img alt={ home.image.alt } src={ home.image.url } />
                             <RichText
                                 render={ home.presentation }
                                 linkResolver={ linkResolver }
@@ -106,7 +106,10 @@ const Home = () => {
                         <div>
                             { newsPost ? (
                                 <div>
-                                    <img alt="" src={ newsPost.data.image.url } />
+                                    <img
+                                        alt={ newsPost.data.image.alt }
+                                        src={ newsPost.data.image.url }
+                                    />
                                     { RichText.render(newsPost.data.title) }
                                     <p>{ newsPost.first_publication_date }</p>
                                 </div>

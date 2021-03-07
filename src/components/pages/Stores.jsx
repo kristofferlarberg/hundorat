@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Prismic from '@prismicio/client';
 import { RichText } from 'prismic-reactjs';
-import { apiEndpoint } from '../prismic-configuration';
+import { apiEndpoint } from '../../prismic-configuration';
 
 const client = Prismic.client(apiEndpoint);
 
@@ -55,7 +55,7 @@ const Stores = () => {
                         { stores ? stores.map(item => (
                             <div key={ item.id }>
                                 { item.data.store_images.map(images => (
-                                    <img alt="Butiksbild" src={ images.image.url } />
+                                    <img alt={ images.image.alt } src={ images.image.url } />
                                 )) }
                                 { RichText.render(item.data.store_name) }
                                 { RichText.render(item.data.address_1) }

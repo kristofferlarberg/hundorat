@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Prismic from '@prismicio/client';
 import { RichText } from 'prismic-reactjs';
-import { apiEndpoint, linkResolver } from '../prismic-configuration';
+import { apiEndpoint, linkResolver } from '../../prismic-configuration';
 
 const client = Prismic.client(apiEndpoint);
 
@@ -30,18 +30,18 @@ const Page = ({ match }) => {
         };
 
         fetchData();
-    }, []);
+    }, [uid]);
 
     if (prismicData) {
         const page = prismicData.data;
-
+        console.log(prismicData);
         return (
             <>
                 { page ? (
                     <div>
                         { page.image ? (
                             <>
-                                <img alt="" src={ page.image.url } />
+                                <img alt={ page.image.alt } src={ page.image.url } />
                                 <RichText render={ page.image_caption } />
                             </>
                         ) : null }
