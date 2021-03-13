@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'prismic-reactjs';
+import { Link, RichText } from 'prismic-reactjs';
 import { Link as RouterLink } from 'react-router-dom';
 import Prismic from '@prismicio/client';
+
 import { apiEndpoint, linkResolver } from '../../prismic-configuration';
 
 const client = Prismic.client(apiEndpoint);
 
 const SiteLayout = ({ children }) => {
-    const [prismicData, setPrismicData] = useState({
-        pagesData: null,
-        menuData: null,
-    });
+    const [prismicData, setPrismicData] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -39,27 +37,32 @@ const SiteLayout = ({ children }) => {
                 );
 
                 if (pages) {
-                    const pageObjects = [
-                        activitiesPage,
-                        newsPage,
-                        textsPage,
-                        storesPage,
+                    const linksData = [
+                        { title: activitiesPage.data.page_title, uid: activitiesPage.uid },
+                        { title: newsPage.data.page_title, uid: newsPage.uid },
+                        { title: textsPage.data.page_title, uid: textsPage.uid },
+                        { title: storesPage.data.page_title, uid: storesPage.uid },
                     ];
 
-                    pages.results.forEach(item => pageObjects.push(item));
-
-                    setPrismicData(
+                    // pushes the pages of type page separately to the linksData-array
+                    pages.results.forEach(item => linksData.push(
                         {
-                            pagesData: pageObjects,
-                            menuData,
+                            title: item.data.page_title,
+                            uid: item.uid,
                         },
-                    );
+                    ));
+
+                    menuData.data.links.forEach((menuObj) => {
+                        linksData.forEach((linkObj) => {
+                            if (linkObj.uid === menuObj.link.uid) {
+                                const linkObjCopy = linkObj;
+                                linkObjCopy.link = menuObj.link;
+                            }
+                        });
+                    });
+
+                    setPrismicData(linksData);
                 }
-
-                /* if (menuData) {
-                    setPrismicData(menuData);
-                } */
-
                 else {
                     console.warn(
                         'Page document not found.',
@@ -75,20 +78,21 @@ const SiteLayout = ({ children }) => {
     }, []);
 
     if (prismicData) {
-        const { menuData } = prismicData;
+        const linksData = prismicData;
 
         return (
             <>
                 <>
                     <div>
-                        <h1>Header</h1>
-                        { menuData ? menuData.data.links.map(item => (
+                        <RouterLink to="/">
+                            <h1>Header</h1>
+                        </RouterLink>
+                        { linksData ? linksData.map(item => (
                             <RouterLink
                                 key={ item.link.id }
                                 to={ Link.url(item.link, linkResolver) }
                             >
-                                { /* Hämta alla titlar från sidor och matcha med uid på länkar */ }
-                                Länk
+                                <RichText render={ item.title } />
                             </RouterLink>
                         )) : null }
                     </div>
