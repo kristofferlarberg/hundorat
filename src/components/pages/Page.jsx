@@ -1,59 +1,42 @@
-import React, { useEffect, useState } from 'react';
-import Prismic from '@prismicio/client';
+import React from 'react';
+import { useQuery } from 'react-query';
 import { RichText } from 'prismic-reactjs';
-import { apiEndpoint, linkResolver } from '../../prismic-configuration';
 
-const client = Prismic.client(apiEndpoint);
+import { linkResolver } from '../../prismic-configuration';
+import getPage from '../../fetching/getPage';
+import NotFound from './NotFound';
 
 const Page = ({ match }) => {
-    const [prismicData, setPrismicData] = useState({ page: null });
-
     const { uid } = match.params;
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const page = await client.getByUID('page', uid);
+    const pageQuery = useQuery(['page', uid], () => getPage(uid));
 
-                if (page) {
-                    setPrismicData(page);
-                }
-                else {
-                    console.warn(
-                        'Page document not found.',
-                    );
-                }
-            }
-            catch (error) {
-                console.log('error');
-            }
-        };
-
-        fetchData();
-    }, [uid]);
-
-    if (prismicData) {
-        const page = prismicData.data;
-
-        return (
-            <>
-                { page ? (
-                    <div>
-                        { page.image ? (
-                            <>
-                                <img alt={ page.image.alt } src={ page.image.url } />
-                                <RichText render={ page.image_caption } />
-                            </>
-                        ) : null }
-                        <RichText render={ page.page_title } />
-                        <RichText render={ page.text } linkResolver={ linkResolver } />
-                    </div>
-                ) : <div>Not found</div> }
-            </>
-        );
+    if (pageQuery.isLoading) {
+        return <span>Loading...</span>;
     }
 
-    return null;
+    if (pageQuery.isError) {
+        return <NotFound />;
+    }
+
+    const page = pageQuery.data.data;
+
+    return (
+        <>
+            { page ? (
+                <div>
+                    { page.image ? (
+                        <>
+                            <img alt={ page.image.alt } src={ page.image.url } />
+                            <RichText render={ page.image_caption } />
+                        </>
+                    ) : null }
+                    <RichText render={ page.page_title } />
+                    <RichText render={ page.text } linkResolver={ linkResolver } />
+                </div>
+            ) : <div>Not found</div> }
+        </>
+    );
 };
 
 export default Page;

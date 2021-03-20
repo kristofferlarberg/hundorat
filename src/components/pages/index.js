@@ -1,4 +1,4 @@
-export { default as AdditionalActivities } from './AdditionalActivities';
+export { default as Activities } from './Activities';
 export { default as Home } from './Home';
 export { default as News } from './News';
 export { default as NewsPost } from './NewsPost';

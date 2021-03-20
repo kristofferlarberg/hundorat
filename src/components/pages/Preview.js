@@ -8,7 +8,7 @@ const Preview = ({ history, location }) => {
         const params = qs.parse(location.search.slice(1));
 
         if (!params.token) {
-            return console.warn(`Unable to retrieve session token from provided url. \n
+            throw new Error(`Unable to retrieve session token from provided url. \n
             Check https://prismic.io/docs/rest-api/beyond-the-api/the-preview-feature for more info`);
         }
 

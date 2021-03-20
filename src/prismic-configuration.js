@@ -4,8 +4,10 @@ export const apiEndpoint = 'https://hundorat.cdn.prismic.io/api/v2';
 
 const accessToken = '';
 
+// TODO: Create variable for slugs that match UID:s
+
 export const linkResolver = (doc) => {
-    if (doc.type === 'additional') return '/ytterligare';
+    if (doc.type === 'activities') return '/ytterligare-aktivitet';
     if (doc.type === 'homepage') return '/';
     if (doc.type === 'news') return '/nyheter';
     if (doc.type === 'news_post') return `/nyheter/${doc.uid}`;

@@ -1,58 +1,44 @@
-import React, { useEffect, useState } from 'react';
-import Prismic from '@prismicio/client';
+import React from 'react';
+import { useQuery } from 'react-query';
 import { RichText } from 'prismic-reactjs';
 
-import { apiEndpoint, linkResolver } from '../../prismic-configuration';
-
-const client = Prismic.client(apiEndpoint);
+import { linkResolver } from '../../prismic-configuration';
+import getNewsPost from '../../fetching/getNewsPost';
+import NotFound from './NotFound';
 
 const NewsPost = ({ match }) => {
-    const [prismicData, setPrismicData] = useState({ newsPost: null });
-
     const { uid } = match.params;
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const newsPost = await client.getByUID('news_post', uid);
+    const newsPostQuery = useQuery(['newsPost', uid], () => getNewsPost(uid));
 
-                if (newsPost) {
-                    return setPrismicData(newsPost);
-                }
-                return console.warn('Page document not found.');
-            }
-            catch (error) {
-                return console.log('error');
-            }
-        };
-        fetchData();
-    }, [uid]);
-
-    if (prismicData) {
-        const newsPost = prismicData;
-
-        return (
-            <>
-                { newsPost.data ? (
-                    <div>
-                        { newsPost.data.image ? (
-                            <>
-                                <img
-                                    alt={ newsPost.data.image.alt }
-                                    src={ newsPost.data.image.url }
-                                />
-                                <RichText render={ newsPost.data.image_caption } />
-                            </>
-                        ) : null }
-                        <RichText render={ newsPost.data.title } />
-                        <p>{ newsPost.first_publication_date }</p>
-                        <RichText render={ newsPost.data.text } linkResolver={ linkResolver } />
-                    </div>
-                ) : <div>Not found</div> }
-            </>
-        );
+    if (newsPostQuery.isLoading) {
+        return <span>Loading...</span>;
     }
-    return null;
+
+    if (newsPostQuery.isError) {
+        return <NotFound />;
+    }
+
+    const newsPost = newsPostQuery.data.data;
+
+    return (
+        <>
+            <div>
+                { newsPost.image ? (
+                    <>
+                        <img
+                            alt={ newsPost.image.alt }
+                            src={ newsPost.image.url }
+                        />
+                        <RichText render={ newsPost.image_caption } />
+                    </>
+                ) : null }
+                <RichText render={ newsPost.title } />
+                <p>{ newsPost.first_publication_date }</p>
+                <RichText render={ newsPost.text } linkResolver={ linkResolver } />
+            </div>
+        </>
+    );
 };
 
 export default NewsPost;

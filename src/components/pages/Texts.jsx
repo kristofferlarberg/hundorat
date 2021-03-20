@@ -1,70 +1,38 @@
-import React, { useEffect, useState } from 'react';
-import Prismic from '@prismicio/client';
+import React from 'react';
 import { RichText } from 'prismic-reactjs';
-import { apiEndpoint } from '../../prismic-configuration';
+import { useQuery } from 'react-query';
 
-const client = Prismic.client(apiEndpoint);
+import getTextsPage from '../../fetching/getTextsPage';
+import getTextPosts from '../../fetching/getTextPosts';
+import NotFound from './NotFound';
 
 const Texts = () => {
-    const [prismicData, setPrismicData] = useState({
-        textsPage: null,
-        textPosts: null,
-    });
+    const textsPageQuery = useQuery('textsPage', getTextsPage);
+    const textsPostsQuery = useQuery('textsPosts', getTextPosts);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const textsPage = await client.getSingle('texts');
-                const textPosts = await client.query(
-                    Prismic.Predicates.at('document.type', 'text_post'),
-                    { fetch: 'text_post.title' },
-                );
-
-                if (textPosts) {
-                    setPrismicData(
-                        {
-                            textsPage,
-                            textPosts: textPosts.results,
-                        },
-                    );
-                }
-                else {
-                    console.warn(
-                        'Page document not found.',
-                    );
-                }
-            }
-            catch (error) {
-                console.log('error');
-            }
-        };
-
-        fetchData();
-    }, []);
-
-    if (prismicData.textPosts) {
-        const textsPage = prismicData.textsPage.data;
-        const { textPosts } = prismicData;
-
-        return (
-            <>
-                { prismicData ? (
-                    <>
-                        <RichText
-                            render={ textsPage.page_title }
-                        />
-                        { textPosts ? textPosts.map(item => (
-                            <div key={ item.id }>
-                                <RichText render={ item.data.title } />
-                            </div>
-                        )) : null }
-                    </>
-                ) : <div>Not found</div> }
-            </>
-        );
+    if (textsPageQuery.isLoading || textsPostsQuery.isLoading) {
+        return <span>Loading...</span>;
     }
 
-    return null;
+    if (textsPageQuery.isError) {
+        return <NotFound />;
+    }
+
+    const textsPage = textsPageQuery.data.data;
+    const textsPosts = textsPostsQuery.data.results;
+
+    return (
+        <>
+            <RichText
+                render={ textsPage.page_title }
+            />
+            { textsPosts.length > 0 ? textsPosts.map(item => (
+                <div key={ item.id }>
+                    <RichText render={ item.data.title } />
+                </div>
+            )) : 'Det finns inga inlägg för tillfället.' }
+        </>
+    );
 };
 
 export default Texts;

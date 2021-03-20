@@ -1,55 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import Prismic from '@prismicio/client';
+import React from 'react';
+import { useQuery } from 'react-query';
 import { RichText } from 'prismic-reactjs';
 
-import { apiEndpoint, linkResolver } from '../../prismic-configuration';
-
-const client = Prismic.client(apiEndpoint);
+import { linkResolver } from '../../prismic-configuration';
+import getTextPost from '../../fetching/getTextPost';
+import NotFound from './NotFound';
 
 const TextPost = ({ match }) => {
-    const [prismicData, setPrismicData] = useState({ textPost: null });
-
     const { uid } = match.params;
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const textPost = await client.getByUID('text_post', uid);
+    const textPostQuery = useQuery(['textPost', uid], () => getTextPost(uid));
 
-                if (textPost) {
-                    return setPrismicData(textPost);
-                }
-                return console.warn('Page document not found.');
-            }
-            catch (error) {
-                return console.log('error');
-            }
-        };
-
-        fetchData();
-    }, [uid]);
-
-    if (prismicData) {
-        const textPost = prismicData.data;
-
-        return (
-            <>
-                { textPost ? (
-                    <div>
-                        { textPost.image ? (
-                            <>
-                                <img alt={ textPost.image.alt } src={ textPost.image.url } />
-                                <RichText render={ textPost.image_caption } />
-                            </>
-                        ) : null }
-                        <RichText render={ textPost.title } />
-                        <RichText render={ textPost.text } linkResolver={ linkResolver } />
-                    </div>
-                ) : <div>Not found</div> }
-            </>
-        );
+    if (textPostQuery.isLoading) {
+        return <span>Loading...</span>;
     }
-    return null;
+
+    if (textPostQuery.isError) {
+        return <NotFound />;
+    }
+
+    const textPost = textPostQuery.data.data;
+
+    return (
+        <>
+            <div>
+                { textPost.image ? (
+                    <>
+                        <img alt={ textPost.image.alt } src={ textPost.image.url } />
+                        <RichText render={ textPost.image_caption } />
+                    </>
+                ) : null }
+                <RichText render={ textPost.title } />
+                <RichText render={ textPost.text } linkResolver={ linkResolver } />
+            </div>
+        </>
+    );
 };
 
 export default TextPost;
