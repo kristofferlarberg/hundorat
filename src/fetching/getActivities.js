@@ -10,7 +10,7 @@ const getActivities = async () => {
         return activities;
     }
     catch (error) {
-        throw new Error();
+        throw new Error('No data found');
     }
 };
 

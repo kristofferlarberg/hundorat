@@ -7,7 +7,7 @@ const getActivitiesPage = async () => {
         return activitiesPage;
     }
     catch (error) {
-        throw new Error();
+        throw new Error('No data found');
     }
 };
 

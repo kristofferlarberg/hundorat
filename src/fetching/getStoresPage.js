@@ -7,7 +7,7 @@ const getStoresPage = async () => {
         return storesPage;
     }
     catch (error) {
-        throw new Error();
+        throw new Error('No data found');
     }
 };
 

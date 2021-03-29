@@ -7,7 +7,7 @@ const getHomepage = async () => {
         return homepage;
     }
     catch (error) {
-        throw new Error();
+        throw new Error('No data found');
     }
 };
 

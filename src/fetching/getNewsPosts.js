@@ -10,7 +10,7 @@ const getNewsPosts = async () => {
         return newsPosts;
     }
     catch (error) {
-        throw new Error();
+        throw new Error('No data found');
     }
 };
 

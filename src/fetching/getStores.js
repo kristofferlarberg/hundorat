@@ -10,7 +10,7 @@ const getStores = async () => {
         return stores;
     }
     catch (error) {
-        throw new Error();
+        throw new Error('No data found');
     }
 };
 

@@ -7,7 +7,7 @@ const fetchTextsPage = async () => {
         return textsPage;
     }
     catch (error) {
-        throw new Error();
+        throw new Error('No data found');
     }
 };
 

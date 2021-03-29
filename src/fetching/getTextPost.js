@@ -7,7 +7,7 @@ const getTextPost = async (uid) => {
         return textPost;
     }
     catch (error) {
-        throw new Error();
+        throw new Error('No data found');
     }
 };
 
