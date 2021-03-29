@@ -1,3 +1,4 @@
+import { ChakraProvider } from '@chakra-ui/react';
 import { Helmet } from 'react-helmet';
 import React from 'react';
 import { ReactQueryDevtools } from 'react-query/devtools';
@@ -7,7 +8,9 @@ import {
     QueryClientProvider,
 } from 'react-query';
 import { apiEndpoint } from './prismic-configuration';
+
 import SiteLayout from './components/layout/SiteLayout';
+import theme from './theme';
 import {
     Activities,
     Home,
@@ -21,11 +24,10 @@ import {
     TextPost,
 } from './components/pages';
 
-const queryClient = new QueryClient();
-
 const App = () => {
     const repoNameArray = /([^/]+)\.cdn.prismic\.io\/api/.exec(apiEndpoint);
     const repoName = repoNameArray[1];
+    const queryClient = new QueryClient();
 
     return (
         <QueryClientProvider client={ queryClient }>
@@ -36,22 +38,24 @@ const App = () => {
                     src={ `//static.cdn.prismic.io/prismic.js?repo=${repoName}&new=true` }
                 />
             </Helmet>
-            <BrowserRouter>
-                <Switch>
-                    <SiteLayout>
-                        <Route exact path="/" component={ Home } />
-                        <Route exact path="/butiker" component={ Stores } />
-                        <Route exact path="/nyheter" component={ News } />
-                        <Route exact path="/nyheter/:uid" component={ NewsPost } />
-                        <Route exact path="/preview" component={ Preview } />
-                        <Route exact path="/texter" component={ Texts } />
-                        <Route exact path="/texter/:uid" component={ TextPost } />
-                        <Route exact path="/ytterligare-aktivitet" component={ Activities } />
-                        <Route exact path="/pages/:uid" component={ Page } />
-                    </SiteLayout>
-                    <Route component={ NotFound } />
-                </Switch>
-            </BrowserRouter>
+            <ChakraProvider theme={ theme }>
+                <BrowserRouter>
+                    <Switch>
+                        <SiteLayout>
+                            <Route exact path="/" component={ Home } />
+                            <Route exact path="/butiker" component={ Stores } />
+                            <Route exact path="/nyheter" component={ News } />
+                            <Route exact path="/nyheter/:uid" component={ NewsPost } />
+                            <Route exact path="/preview" component={ Preview } />
+                            <Route exact path="/texter" component={ Texts } />
+                            <Route exact path="/texter/:uid" component={ TextPost } />
+                            <Route exact path="/ytterligare-aktivitet" component={ Activities } />
+                            <Route exact path="/pages/:uid" component={ Page } />
+                        </SiteLayout>
+                        <Route component={ NotFound } />
+                    </Switch>
+                </BrowserRouter>
+            </ChakraProvider>
             <ReactQueryDevtools initialIsOpen={ false } />
         </QueryClientProvider>
     );

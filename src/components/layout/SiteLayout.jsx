@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, RichText } from 'prismic-reactjs';
 import { Link as RouterLink } from 'react-router-dom';
 import { useQuery } from 'react-query';
+import { Heading } from '@chakra-ui/react';
 
 import getLinks from '../../fetching/getLinks';
 import { linkResolver } from '../../prismic-configuration';
@@ -25,7 +26,9 @@ const SiteLayout = ({ children }) => {
             <>
                 <div>
                     <RouterLink to="/">
-                        <h1>Header</h1>
+                        <Heading as="h1" size="3xl" isTruncated>
+                            Antikvariat Hundörat
+                        </Heading>
                     </RouterLink>
                     { links ? links.map(item => (
                         <RouterLink
