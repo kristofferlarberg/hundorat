@@ -5,9 +5,6 @@ const styles = {
         },
         a: {
             color: 'red',
-            _hover: {
-                textDecoration: 'underline',
-            },
         },
     },
 };

@@ -9,7 +9,7 @@ import {
 } from 'react-query';
 import { apiEndpoint } from './prismic-configuration';
 
-import SiteLayout from './components/layout/SiteLayout';
+import MainLayout from './components/layout/MainLayout';
 import theme from './theme';
 import {
     Activities,
@@ -41,7 +41,7 @@ const App = () => {
             <ChakraProvider theme={ theme }>
                 <BrowserRouter>
                     <Switch>
-                        <SiteLayout>
+                        <MainLayout>
                             <Route exact path="/" component={ Home } />
                             <Route exact path="/butiker" component={ Stores } />
                             <Route exact path="/nyheter" component={ News } />
@@ -51,7 +51,7 @@ const App = () => {
                             <Route exact path="/texter/:uid" component={ TextPost } />
                             <Route exact path="/ytterligare-aktivitet" component={ Activities } />
                             <Route exact path="/pages/:uid" component={ Page } />
-                        </SiteLayout>
+                        </MainLayout>
                         <Route component={ NotFound } />
                     </Switch>
                 </BrowserRouter>
