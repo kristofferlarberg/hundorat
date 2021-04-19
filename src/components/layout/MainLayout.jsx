@@ -4,6 +4,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { EmailIcon } from '@chakra-ui/icons';
 import {
+    Box,
     Button,
     Center,
     Drawer,
@@ -12,10 +13,13 @@ import {
     DrawerOverlay,
     DrawerContent,
     DrawerCloseButton,
+    Flex,
     Heading,
+    Image,
     Link,
     useDisclosure,
     StackDivider,
+    Text,
     Tooltip,
     VisuallyHidden,
     VStack,
@@ -103,7 +107,15 @@ const SiteLayout = ({ children }) => {
                 </DrawerOverlay>
             </Drawer>
             <div>{ children }</div>
-            <div>Footer</div>
+            <Flex justify="space-between">
+                <Image alt="International league of antiquarian booksellers" boxSize="60px" src="/images/ilogo.png" />
+                <Box>
+                    <Text align="center">Antikvariat Hundörat</Text>
+                    <Text align="center">070-770 40 20</Text>
+                    <Link align="center" href="mailto: rarebooks@hundorat.se">rarebooks@hundorat.se</Link>
+                </Box>
+                <Image alt="Svenska Antikvariatföreningen" boxSize="60px" src="/images/svaf_logo.png" />
+            </Flex>
         </>
     );
 };
