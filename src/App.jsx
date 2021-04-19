@@ -24,6 +24,10 @@ import {
     TextPost,
 } from './components/pages';
 
+import '@fontsource/spectral/400.css';
+import '@fontsource/spectral/700.css';
+import '@fontsource/spectral/400-italic.css';
+
 const App = () => {
     const repoNameArray = /([^/]+)\.cdn.prismic\.io\/api/.exec(apiEndpoint);
     const repoName = repoNameArray[1];
