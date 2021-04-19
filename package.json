@@ -7,6 +7,7 @@
     "@chakra-ui/react": "^1.4.1",
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "^11.1.5",
+    "@fontsource/spectral": "^4.2.3",
     "@prismicio/client": "^4.0.0",
     "framer-motion": "^4.0.3",
     "prismic-javascript": "^2.1.1",
