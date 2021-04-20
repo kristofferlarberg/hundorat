@@ -1,6 +1,4 @@
 import { ChakraProvider } from '@chakra-ui/react';
-import "@fontsource/spectral/400.css"
-import "@fontsource/spectral/700.css"
 import { Helmet } from 'react-helmet';
 import React from 'react';
 import { ReactQueryDevtools } from 'react-query/devtools';
@@ -27,6 +25,8 @@ import {
 } from './components/pages';
 
 import '@fontsource/spectral/400.css';
+import '@fontsource/spectral/500.css';
+import '@fontsource/spectral/600.css';
 import '@fontsource/spectral/700.css';
 import '@fontsource/spectral/400-italic.css';
 

@@ -7,6 +7,7 @@ import {
     Box,
     Button,
     Center,
+    Divider,
     Drawer,
     DrawerBody,
     DrawerHeader,
@@ -49,13 +50,14 @@ const SiteLayout = ({ children }) => {
 
     return (
         <>
-            <Box as="nav" borderBottom="2px" mb={ 6 }>
+            <Box as="header" mb={ 6 }>
                 <VStack
                     align="center"
                     borderBottom="4px"
                     spacing={ 4 }
-                    mb="6px"
-                    pb={ 6 }
+                    mb="4px"
+                    pb={ 8 }
+                    pt={ 6 }
                 >
                     <Link as={ RouterLink } to="/" variant="subtle">
                         <Heading align="center" as="h1" size="3xl" whiteSpace="break-spaces">
@@ -82,10 +84,11 @@ const SiteLayout = ({ children }) => {
                         </WrapItem>
                     </Wrap>
                 </VStack>
+                <Divider />
             </Box>
             <Drawer isOpen={ isOpen } onClose={ onClose } placement="top">
                 <DrawerOverlay>
-                    <DrawerContent>
+                    <DrawerContent pt={ 8 }>
                         <DrawerCloseButton />
                         <DrawerHeader>
                             <Link as={ RouterLink } onClick={ onClose } to="/" variant="subtle">
@@ -118,8 +121,8 @@ const SiteLayout = ({ children }) => {
                     </DrawerContent>
                 </DrawerOverlay>
             </Drawer>
-            <div>{ children }</div>
-            <Flex justify="space-between">
+            { children }
+            <Flex as="footer" justify="space-between" mt={ 6 }>
                 <Image alt="International league of antiquarian booksellers" boxSize="60px" src="/images/ilogo.png" />
                 <Box>
                     <Text align="center">Antikvariat Hundörat</Text>
