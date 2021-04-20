@@ -1,6 +1,17 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { RichText } from 'prismic-reactjs';
+import {
+    Box,
+    Center,
+    Container,
+    Divider,
+    Heading,
+    Image,
+    Text,
+    VStack,
+    Wrap,
+} from '@chakra-ui/react';
 
 import getHomepage from '../../fetching/getHomepage';
 import getNewsPosts from '../../fetching/getNewsPosts';
@@ -35,66 +46,76 @@ const Home = () => {
 
     return (
         <>
-            <div>
-                <img alt={ homepage.image.alt } src={ homepage.image.url } />
-                <RichText
-                    render={ homepage.presentation }
-                    linkResolver={ linkResolver }
-                />
-            </div>
-            <hr />
-            <div
-                style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                }}
+            <VStack
+                align="center"
+                spacing={ 12 }
             >
-                { stores ? stores.map(item => (
-                    <div key={ item.id }>
-                        { RichText.render(item.data.store_name) }
-                        { RichText.render(item.data.opening_hours_weekdays) }
-                        { RichText.render(item.data.opening_hours_weekends) }
-                        {
-                            RichText.render(item.data.opening_hours_additional)
-                                ? RichText.render(item.opening_hours_additional)
-                                : null
-                        }
-                    </div>
-                )) : null }
-            </div>
-            <hr />
-            <div>
-                { newsPost.length > 0 ? (
-                    <div>
-                        <img
-                            alt={ newsPost[0].data.image.alt }
-                            src={ newsPost[0].data.image.url }
+                <Image alt={ homepage.image.alt } src={ homepage.image.url } />
+                <Box w="100%">
+                    <Container>
+                        <RichText
+                            render={ homepage.presentation }
+                            linkResolver={ linkResolver }
                         />
-                        { RichText.render(newsPost[0].data.title) }
-                        <p>{ newsPost.first_publication_date }</p>
-                    </div>
-                ) : null }
-            </div>
-            <hr />
-            <div style={{ display: 'flex' }}>
-                { newsPost.length > 0 ? textPosts.map(item => (
-                    <div
-                        key={ item.id }
-                        style={{
-                            alignContent: 'center',
-                            border: 'solid 1px black',
-                            display: 'flex',
-                            heigh: '200px',
-                            margin: '2rem',
-                            width: '100px',
-                            textAlign: 'center',
-                        }}
-                    >
-                        { RichText.render(item.data.title) }
-                    </div>
-                )) : null }
-            </div>
+                    </Container>
+                </Box>
+                <Divider />
+                <VStack
+                    divider={ <Text mt={ 2 }>***</Text> }
+                    spacing={ 2 }
+                >
+                    { stores ? stores.map(item => (
+                        <Box key={ item.id } textAlign="center" w="100%">
+                            <Heading as="h3" size="sm">
+                                { RichText.asText(item.data.store_name) }
+                            </Heading>
+                            <Text>
+                                { RichText.asText(item.data.opening_hours_weekdays) }
+                            </Text>
+                            <Text>
+                                { RichText.asText(item.data.opening_hours_weekends) }
+                            </Text>
+                            {
+                                RichText.asText(item.data.opening_hours_additional)
+                                    ? (
+                                        <Text>
+                                            { RichText.asText(item.data.opening_hours_additional) }
+                                        </Text>
+                                    ) : null
+                            }
+                        </Box>
+                    )) : null }
+                </VStack>
+                <Divider />
+                <Center>
+                    { newsPost.length > 0 ? (
+                        <VStack spacing={ 0.2 }>
+                            <Image
+                                alt={ newsPost[0].data.image.alt }
+                                src={ newsPost[0].data.image.url }
+                                mb={ 1.5 }
+                            />
+                            <Heading as="h3" size="sm">
+                                { RichText.asText(newsPost[0].data.title) }
+                            </Heading>
+                            <Text>
+                                { newsPost[0].first_publication_date }
+                            </Text>
+                        </VStack>
+                    ) : null }
+                </Center>
+                <Divider />
+                <Wrap justify="center" spacing={ 6 }>
+                    { newsPost.length > 0 ? textPosts.map(item => (
+                        <Center border="1px" h={ 60 } borderColor="gray.800" key={ item.id } w={ 60 }>
+                            <Heading as="h4" size="md">
+                                { RichText.asText(item.data.title) }
+                            </Heading>
+                        </Center>
+                    )) : null }
+                </Wrap>
+                <Divider />
+            </VStack>
         </>
     );
 };
