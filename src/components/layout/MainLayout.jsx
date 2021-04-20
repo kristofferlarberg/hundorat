@@ -23,6 +23,8 @@ import {
     Tooltip,
     VisuallyHidden,
     VStack,
+    Wrap,
+    WrapItem,
 } from '@chakra-ui/react';
 
 import getLinks from '../../fetching/getLinks';
@@ -47,30 +49,40 @@ const SiteLayout = ({ children }) => {
 
     return (
         <>
-            <VStack
-                align="center"
-                spacing={ 4 }
-                mb={ 6 }
-            >
-                <Link as={ RouterLink } to="/" variant="subtle">
-                    <Heading as="h1" size="3xl" align="center" whiteSpace="break-spaces">
-                        Antikvariat Hundörat
-                    </Heading>
-                </Link>
-                <Button colorScheme="gray.800" href="mailto: rarebooks@hundorat.se" onClick={ onOpen } ref={ btnRef } variant="outline">
-                    Öppna meny
-                </Button>
-                <Tooltip bg="gray.800" fontSize="md" hasArrow label="rarebooks@hundorat.se">
-                    <Link href="mailto:rarebooks@hundorat.se" variant="subtle">
-                        <Button colorScheme="gray.800" variant="outline">
-                            <VisuallyHidden>
-                                Kontakt
-                            </VisuallyHidden>
-                            <EmailIcon />
-                        </Button>
+            <Box as="nav" borderBottom="2px" mb={ 6 }>
+                <VStack
+                    align="center"
+                    borderBottom="4px"
+                    spacing={ 4 }
+                    mb="6px"
+                    pb={ 6 }
+                >
+                    <Link as={ RouterLink } to="/" variant="subtle">
+                        <Heading align="center" as="h1" size="3xl" whiteSpace="break-spaces">
+                            Antikvariat Hundörat
+                        </Heading>
                     </Link>
-                </Tooltip>
-            </VStack>
+                    <Wrap>
+                        <WrapItem>
+                            <Button colorScheme="gray.800" href="mailto: rarebooks@hundorat.se" onClick={ onOpen } ref={ btnRef } variant="outline">
+                                Öppna meny
+                            </Button>
+                        </WrapItem>
+                        <WrapItem>
+                            <Tooltip bg="gray.800" fontSize="md" hasArrow label="rarebooks@hundorat.se">
+                                <Link href="mailto:rarebooks@hundorat.se" variant="subtle">
+                                    <Button colorScheme="gray.800" variant="outline">
+                                        <VisuallyHidden>
+                                            Kontakt
+                                        </VisuallyHidden>
+                                        <EmailIcon />
+                                    </Button>
+                                </Link>
+                            </Tooltip>
+                        </WrapItem>
+                    </Wrap>
+                </VStack>
+            </Box>
             <Drawer isOpen={ isOpen } onClose={ onClose } placement="top">
                 <DrawerOverlay>
                     <DrawerContent>
