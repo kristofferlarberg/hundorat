@@ -1,13 +1,7 @@
 import React from 'react';
 import { RichText } from 'prismic-reactjs';
 import { useQuery } from 'react-query';
-import { Link as RouterLink } from 'react-router-dom';
 import {
-    Box,
-    Center,
-    Heading,
-    Link,
-    Wrap,
     WrapItem,
 } from '@chakra-ui/react';
 
@@ -15,6 +9,8 @@ import getTextsPage from '../../fetching/getTextsPage';
 import getTextPosts from '../../fetching/getTextPosts';
 import NotFound from './NotFound';
 import { linkResolver } from '../../prismic-configuration';
+import BlogLayout from '../layout/BlogLayout';
+import TextPostCard from '../misc/TextPostCard';
 
 const Texts = () => {
     const textsPageQuery = useQuery('textsPage', getTextsPage);
@@ -32,27 +28,17 @@ const Texts = () => {
     const textsPosts = textsPostsQuery.data.results;
 
     return (
-        <Box mb={ 24 }>
-            <Heading as="h2" size="xl" textAlign="center">{ RichText.asText(textsPage.page_title) }</Heading>
-            <Wrap justify="center" mt={ 6 } spacing={ 6 }>
-                { textsPosts.length > 0 ? textsPosts.map(post => (
-                    <Link
-                        as={ RouterLink }
-                        key={ post.id }
-                        to={ linkResolver(post) }
-                        variant="subtle"
-                    >
-                        <WrapItem>
-                            <Center border="1px" h={ 80 } borderColor="gray.800" key={ post.id } w={ 80 }>
-                                <Heading as="h4" p={ 2 } size="md" textAlign="center">
-                                    { RichText.asText(post.data.title) }
-                                </Heading>
-                            </Center>
-                        </WrapItem>
-                    </Link>
-                )) : 'Det finns inga inlägg för tillfället.' }
-            </Wrap>
-        </Box>
+        <BlogLayout heading={ RichText.asText(textsPage.page_title) }>
+            { textsPosts.length > 0 ? textsPosts.map(post => (
+                <WrapItem key={ post.id }>
+                    <TextPostCard
+                        heading={ RichText.asText(post.data.title) }
+                        link={ linkResolver(post) }
+                        type="text"
+                    />
+                </WrapItem>
+            )) : 'Det finns inga inlägg för tillfället.' }
+        </BlogLayout>
     );
 };
 

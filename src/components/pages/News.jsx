@@ -5,6 +5,9 @@ import { useQuery } from 'react-query';
 import getNewsPage from '../../fetching/getNewsPage';
 import getNewsPosts from '../../fetching/getNewsPosts';
 import NotFound from './NotFound';
+import NewsPostCard from '../misc/NewsPostCard';
+import { linkResolver } from '../../prismic-configuration';
+import BlogLayout from '../layout/BlogLayout';
 
 const News = () => {
     const newsPageQuery = useQuery('newsPage', getNewsPage);
@@ -22,16 +25,19 @@ const News = () => {
     const newsPosts = newsPostsQuery.data.results;
 
     return (
-        <>
-            <RichText
-                render={ newsPage.page_title }
-            />
-            { newsPosts.length > 0 ? newsPosts.map(item => (
-                <div key={ item.id }>
-                    <RichText render={ item.data.title } />
-                </div>
+        <BlogLayout heading={ RichText.asText(newsPage.page_title) }>
+            { newsPosts.length > 0 ? newsPosts.map(post => (
+                <NewsPostCard
+                    alt={ post.data.image.alt }
+                    heading={ RichText.asText(post.data.title) }
+                    key={ post.id }
+                    link={ linkResolver(post) }
+                    src={ post.data.image.url }
+                    date={ post.first_publication_date }
+                    type="news"
+                />
             )) : 'Det finns inga inlägg för tillfället.' }
-        </>
+        </BlogLayout>
     );
 };
 

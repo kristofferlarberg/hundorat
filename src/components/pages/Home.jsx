@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { RichText } from 'prismic-reactjs';
 import {
@@ -9,7 +8,6 @@ import {
     Divider,
     Heading,
     Image,
-    Link,
     Text,
     VStack,
     Wrap,
@@ -21,6 +19,8 @@ import getStores from '../../fetching/getStores';
 import fetchTextPosts from '../../fetching/getTextPosts';
 import { linkResolver } from '../../prismic-configuration';
 import NotFound from './NotFound';
+import NewsPostCard from '../misc/NewsPostCard';
+import TextPostCard from '../misc/TextPostCard';
 
 const Home = () => {
     const homepageQuery = useQuery('homepage', getHomepage);
@@ -91,43 +91,25 @@ const Home = () => {
                 <Divider />
                 <Center>
                     { newsPost.length > 0 ? (
-                        <Link
-                            as={ RouterLink }
+                        <NewsPostCard
+                            alt={ newsPost[0].data.image.alt }
+                            heading={ RichText.asText(newsPost[0].data.title) }
                             key={ newsPost[0].id }
-                            to={ linkResolver(newsPost[0]) }
-                            variant="subtle"
-                        >
-                            <VStack spacing={ 0.2 }>
-                                <Image
-                                    alt={ newsPost[0].data.image.alt }
-                                    src={ newsPost[0].data.image.url }
-                                    mb={ 1.5 }
-                                />
-                                <Heading as="h3" size="sm">
-                                    { RichText.asText(newsPost[0].data.title) }
-                                </Heading>
-                                <Text>
-                                    { newsPost[0].first_publication_date }
-                                </Text>
-                            </VStack>
-                        </Link>
+                            link={ linkResolver(newsPost[0]) }
+                            src={ newsPost[0].data.image.url }
+                            date={ newsPost[0].first_publication_date }
+                            type="news"
+                        />
                     ) : null }
                 </Center>
                 <Divider />
                 <Wrap justify="center" spacing={ 6 }>
                     { textPosts.length > 0 ? textPosts.map(post => (
-                        <Link
-                            as={ RouterLink }
-                            key={ post.id }
-                            to={ linkResolver(post) }
-                            variant="subtle"
-                        >
-                            <Center border="1px" h={ 60 } borderColor="gray.800" key={ post.id } w={ 60 }>
-                                <Heading as="h4" size="md">
-                                    { RichText.asText(post.data.title) }
-                                </Heading>
-                            </Center>
-                        </Link>
+                        <TextPostCard
+                            heading={ RichText.asText(post.data.title) }
+                            link={ linkResolver(post) }
+                            type="text"
+                        />
                     )) : null }
                 </Wrap>
                 <Divider />
