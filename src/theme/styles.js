@@ -1,7 +1,7 @@
 const styles = {
     global: {
         body: {
-            backgroundColor: 'yellow.100',
+            backgroundColor: 'floralwhite',
             margin: '1rem',
             fontSize: 'lg',
         },
