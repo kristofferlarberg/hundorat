@@ -21,7 +21,7 @@ const NewsPost = ({ match }) => {
     }
 
     const newsPost = newsPostQuery.data;
-    console.log(newsPost.first_publication_date);
+
     return (
         <>
             { newsPost ? (
