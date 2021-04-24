@@ -6,7 +6,7 @@ import {
 } from '@chakra-ui/react';
 
 const BlogLayout = ({ heading, children }) => (
-    <Box mb={ 24 }>
+    <Box>
         <Heading as="h2" size="xl" textAlign="center">{ heading }</Heading>
         <Wrap justify="center" mt={ 6 } spacing={ 6 }>
             { children }

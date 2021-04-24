@@ -1,5 +1,8 @@
 import React from 'react';
 import { useQuery } from 'react-query';
+import {
+    Box,
+} from '@chakra-ui/react';
 
 import Footer from '../misc/Footer';
 import getLinks from '../../fetching/getLinks';
@@ -22,7 +25,9 @@ const MainLayout = ({ children }) => {
     return (
         <>
             <Header links={ links } />
-            { children }
+            <Box mt={ 12 } mb={ 24 }>
+                { children }
+            </Box>
             <Footer />
         </>
     );

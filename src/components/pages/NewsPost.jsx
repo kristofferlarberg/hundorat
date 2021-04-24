@@ -5,6 +5,7 @@ import { RichText } from 'prismic-reactjs';
 import { linkResolver } from '../../prismic-configuration';
 import getNewsPost from '../../fetching/getNewsPost';
 import NotFound from './NotFound';
+import ArticleLayout from '../layout/ArticleLayout';
 
 const NewsPost = ({ match }) => {
     const { uid } = match.params;
@@ -19,24 +20,22 @@ const NewsPost = ({ match }) => {
         return <NotFound />;
     }
 
-    const newsPost = newsPostQuery.data.data;
-
+    const newsPost = newsPostQuery.data;
+    console.log(newsPost.first_publication_date);
     return (
         <>
-            <div>
-                { newsPost.image ? (
-                    <>
-                        <img
-                            alt={ newsPost.image.alt }
-                            src={ newsPost.image.url }
-                        />
-                        <RichText render={ newsPost.image_caption } />
-                    </>
-                ) : null }
-                <RichText render={ newsPost.title } />
-                <p>{ newsPost.first_publication_date }</p>
-                <RichText render={ newsPost.text } linkResolver={ linkResolver } />
-            </div>
+            { newsPost ? (
+                <ArticleLayout
+                    alt={ newsPost.data.image.alt }
+                    src={ newsPost.data.image.url }
+                    date={ newsPost.first_publication_date }
+                    caption={ RichText.asText(newsPost.data.image_caption) }
+                    heading={ RichText.asText(newsPost.data.title) }
+                    body={
+                        <RichText render={ newsPost.data.text } linkResolver={ linkResolver } />
+                    }
+                />
+            ) : null }
         </>
     );
 };

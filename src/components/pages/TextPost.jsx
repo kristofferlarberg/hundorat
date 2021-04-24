@@ -5,6 +5,7 @@ import { RichText } from 'prismic-reactjs';
 import { linkResolver } from '../../prismic-configuration';
 import getTextPost from '../../fetching/getTextPost';
 import NotFound from './NotFound';
+import ArticleLayout from '../layout/ArticleLayout';
 
 const TextPost = ({ match }) => {
     const { uid } = match.params;
@@ -23,16 +24,16 @@ const TextPost = ({ match }) => {
 
     return (
         <>
-            <div>
-                { textPost.image ? (
-                    <>
-                        <img alt={ textPost.image.alt } src={ textPost.image.url } />
-                        <RichText render={ textPost.image_caption } />
-                    </>
-                ) : null }
-                <RichText render={ textPost.title } />
-                <RichText render={ textPost.text } linkResolver={ linkResolver } />
-            </div>
+            { textPost ? (
+                <ArticleLayout
+                    alt={ textPost.image.alt }
+                    src={ textPost.image.url }
+                    date={ null }
+                    caption={ RichText.asText(textPost.image_caption) }
+                    heading={ RichText.asText(textPost.title) }
+                    body={ <RichText render={ textPost.text } linkResolver={ linkResolver } /> }
+                />
+            ) : null }
         </>
     );
 };

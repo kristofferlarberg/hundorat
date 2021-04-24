@@ -3,7 +3,9 @@ const styles = {
         body: {
             backgroundColor: 'floralwhite',
             margin: '1rem',
-            fontSize: 'lg',
+        },
+        p: {
+            fontSize: ['xl', 'lg'],
         },
         h1: {
             fontWeight: '600',
@@ -23,6 +25,7 @@ const styles = {
         },
         a: {
             color: 'red',
+            fontSize: ['xl', 'lg'],
         },
     },
 };
