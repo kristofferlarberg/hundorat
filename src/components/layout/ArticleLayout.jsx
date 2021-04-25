@@ -16,18 +16,22 @@ const ArticleLayout = ({
     body,
 }) => (
     <VStack align="center" spacing={ 8 }>
-        <Box as="figure">
-            <Image alt={ alt } src={ src } w={ ['100vw', '100vw', '70vw', '60vw'] } />
-            <Heading
-                as="figcaption"
-                size="xs"
-                textAlign="right"
-                mr={ 6 }
-                mt={ 0 }
-            >
-                { caption }
-            </Heading>
-        </Box>
+        { src
+            ? (
+                <Box as="figure">
+                    <Image alt={ alt } src={ src } w={ ['100vw', '100vw', '70vw', '60vw'] } />
+                    <Heading
+                        as="figcaption"
+                        size="xs"
+                        textAlign="right"
+                        mr={ 6 }
+                        mt={ 0 }
+                    >
+                        { caption }
+                    </Heading>
+                </Box>
+            )
+            : null }
         { date ? <Heading as="h3" size="sm">{ date }</Heading> : null }
         <Heading
             as="h2"

@@ -1,6 +1,13 @@
 import React from 'react';
 import { RichText } from 'prismic-reactjs';
 import { useQuery } from 'react-query';
+import {
+    Box,
+    Image,
+    Heading,
+    Text,
+    VStack,
+} from '@chakra-ui/react';
 
 import getStoresPage from '../../fetching/getStoresPage';
 import getStores from '../../fetching/getStores';
@@ -23,14 +30,47 @@ const Stores = () => {
 
     return (
         <>
-            { storesPage
-                ? <RichText render={ storesPage.page_title } />
-                : null }
-            { stores ? stores.map(item => (
-                <div key={ item.id }>
-                    <RichText render={ item.data.store_name } />
-                </div>
-            )) : null }
+            { storesPage && stores ? (
+                <VStack align="center" spacing={ 8 }>
+                    <Heading
+                        as="h2"
+                        size="xl"
+                        textAlign="center"
+                    >
+                        { RichText.asText(storesPage.page_title) }
+                    </Heading>
+                    <>
+                        { stores.map(store => (
+                            <>
+                                { store.data.store_images.map(image => (
+                                    <Box as="figure">
+                                        <Image alt={ image.image.alt } src={ image.image.url } w={ ['100vw', '100vw', '70vw', '60vw'] } />
+                                    </Box>
+                                )) }
+                                <Box key={ store.id } textAlign="center" w="100%">
+                                    <Heading as="h3" size="sm">
+                                        { RichText.asText(store.data.store_name) }
+                                    </Heading>
+                                    <Text>
+                                        { RichText.asText(store.data.opening_hours_weekdays) }
+                                    </Text>
+                                    <Text>
+                                        { RichText.asText(store.data.opening_hours_weekends) }
+                                    </Text>
+                                    {
+                                        RichText.asText(store.data.opening_hours_additional)
+                                            ? (
+                                                <Text>
+                                                    { RichText.asText(store.data.opening_hours_additional) }
+                                                </Text>
+                                            ) : null
+                                    }
+                                </Box>
+                            </>
+                        )) }
+                    </>
+                </VStack>
+            ) : null }
         </>
     );
 };

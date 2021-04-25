@@ -25,6 +25,7 @@
         "arrow-parens": ["error", "as-needed", {"requireForBlockBody": true }],
         "brace-style": ["error", "stroustrup"],
         "indent": ["error", 4],
+        "max-len": ["error", { "code": 150 }],
         "object-curly-spacing": [2, "always"],
         "react/jsx-curly-spacing": ["error", {
             "children": true,
