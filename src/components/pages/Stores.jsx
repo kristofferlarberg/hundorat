@@ -7,11 +7,13 @@ import {
     Heading,
     Text,
     VStack,
+    Flex,
 } from '@chakra-ui/react';
 
 import getStoresPage from '../../fetching/getStoresPage';
 import getStores from '../../fetching/getStores';
 import NotFound from './NotFound';
+import Slider from '../misc/Slider';
 
 const Stores = () => {
     const storesPageQuery = useQuery('stores', getStoresPage);
@@ -41,12 +43,25 @@ const Stores = () => {
                     </Heading>
                     <>
                         { stores.map(store => (
-                            <>
-                                { store.data.store_images.map(image => (
-                                    <Box as="figure">
-                                        <Image alt={ image.image.alt } src={ image.image.url } w={ ['100vw', '100vw', '70vw', '60vw'] } />
-                                    </Box>
-                                )) }
+                            <Box key={ store.id }>
+                                <Slider>
+                                    { store.data.store_images.map(image => (
+                                        <Flex
+                                            justifyContent="center"
+                                            grow="0"
+                                            shrink="0"
+                                            basis="100%"
+                                            position="relative"
+                                            key={ image.image.url }
+                                        >
+                                            <Image
+                                                alt={ image.image.alt }
+                                                src={ image.image.url }
+
+                                            />
+                                        </Flex>
+                                    )) }
+                                </Slider>
                                 <Box key={ store.id } textAlign="center" w="100%">
                                     <Heading as="h3" size="sm">
                                         { RichText.asText(store.data.store_name) }
@@ -66,7 +81,7 @@ const Stores = () => {
                                             ) : null
                                     }
                                 </Box>
-                            </>
+                            </Box>
                         )) }
                     </>
                 </VStack>
