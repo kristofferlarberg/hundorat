@@ -68,24 +68,23 @@ const Home = () => {
                 </Box>
                 <Divider />
                 <VStack
-                    divider={ <Text mt={ 2 }>***</Text> }
-                    spacing={ 2 }
+                    divider={ <Text mt={ 2.5 } mb={ 2 }>***</Text> }
                 >
                     { stores ? stores.map(item => (
                         <Box key={ item.id } textAlign="center" w="100%">
-                            <Heading as="h3" size="sm">
+                            <Heading as="h3" size="m" mb={ 0.5 }>
                                 { RichText.asText(item.data.store_name) }
                             </Heading>
-                            <Text>
+                            <Text m="0">
                                 { RichText.asText(item.data.opening_hours_weekdays) }
                             </Text>
-                            <Text>
+                            <Text m="0">
                                 { RichText.asText(item.data.opening_hours_weekends) }
                             </Text>
                             {
                                 RichText.asText(item.data.opening_hours_additional)
                                     ? (
-                                        <Text>
+                                        <Text m="0">
                                             { RichText.asText(item.data.opening_hours_additional) }
                                         </Text>
                                     ) : null
