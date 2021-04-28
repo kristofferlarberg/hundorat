@@ -12,7 +12,7 @@ const Activities = () => {
     const activitiesQuery = useQuery('activities', getActivities);
 
     if (activitiesQuery.isLoading) {
-        return <span>Loading...</span>;
+        return null;
     }
 
     if (activitiesQuery.isError) {

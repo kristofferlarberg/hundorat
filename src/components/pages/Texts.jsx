@@ -17,7 +17,7 @@ const Texts = () => {
     const textsPostsQuery = useQuery('textsPosts', getTextPosts);
 
     if (textsPageQuery.isLoading || textsPostsQuery.isLoading) {
-        return <span>Loading...</span>;
+        return null;
     }
 
     if (textsPageQuery.isError) {

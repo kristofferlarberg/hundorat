@@ -20,7 +20,7 @@ const Stores = () => {
     const storesQuery = useQuery('store', getStores);
 
     if (storesPageQuery.isLoading || storesQuery.isLoading) {
-        return <span>Loading...</span>;
+        return null;
     }
 
     if (storesPageQuery.isError || storesQuery.isError) {

@@ -13,7 +13,7 @@ const NewsPost = ({ match }) => {
     const newsPostQuery = useQuery(['newsPost', uid], () => getNewsPost(uid));
 
     if (newsPostQuery.isLoading) {
-        return <span>Loading...</span>;
+        return null;
     }
 
     if (newsPostQuery.isError) {

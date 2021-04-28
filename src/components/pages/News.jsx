@@ -14,7 +14,7 @@ const News = () => {
     const newsPostsQuery = useQuery('newsPosts', getNewsPosts);
 
     if (newsPageQuery.isLoading || newsPostsQuery.isLoading) {
-        return <span>Loading...</span>;
+        return null;
     }
 
     if (newsPageQuery.isError || newsPostsQuery.isError) {

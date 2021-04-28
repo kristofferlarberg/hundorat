@@ -34,10 +34,15 @@ const Home = () => {
         || storesQuery.isLoading
         || textPostsQuery.isLoading
     ) {
-        return <span>Loading...</span>;
+        return null;
     }
 
-    if (homepageQuery.isError || storesQuery.isError) {
+    if (
+        homepageQuery.isError
+        || newsPostsQuery.isError
+        || storesQuery.isError
+        || textPostsQuery.isError
+    ) {
         return <NotFound />;
     }
 

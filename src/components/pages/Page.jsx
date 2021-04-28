@@ -16,7 +16,7 @@ const Page = ({ match }) => {
     const pageQuery = useQuery(['page', uid], () => getPage(uid));
 
     if (pageQuery.isLoading) {
-        return <span>Loading...</span>;
+        return null;
     }
 
     if (pageQuery.isError) {

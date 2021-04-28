@@ -13,7 +13,7 @@ const TextPost = ({ match }) => {
     const textPostQuery = useQuery(['textPost', uid], () => getTextPost(uid));
 
     if (textPostQuery.isLoading) {
-        return <span>Loading...</span>;
+        return null;
     }
 
     if (textPostQuery.isError) {

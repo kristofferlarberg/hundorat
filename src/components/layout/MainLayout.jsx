@@ -8,12 +8,13 @@ import Footer from '../misc/Footer';
 import getLinks from '../../fetching/getLinks';
 import Header from '../misc/Header';
 import NotFound from '../pages/NotFound';
+import Spinner from '../misc/Spinner';
 
 const MainLayout = ({ children }) => {
     const linksQuery = useQuery('links', getLinks);
 
     if (linksQuery.isLoading) {
-        return <span>Loading...</span>;
+        return <Spinner />;
     }
 
     if (linksQuery.isError) {
