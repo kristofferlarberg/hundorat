@@ -7,7 +7,7 @@ import {
 
 const BlogLayout = ({ heading, children }) => (
     <Box>
-        <Heading as="h2" size="xl" textAlign="center">{ heading }</Heading>
+        <Heading as="h2" size="lg" textAlign="center">{ heading }</Heading>
         <Wrap justify="center" mt={ 6 } spacing={ 6 }>
             { children }
         </Wrap>

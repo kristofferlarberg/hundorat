@@ -1,6 +1,7 @@
 import { extendTheme } from '@chakra-ui/react';
 
 import Button from './components/button';
+import Container from './components/container';
 import Divider from './components/divider';
 import DrawerCloseButton from './components/drawerCloseButton';
 import Heading from './components/heading';
@@ -15,6 +16,7 @@ const overrides = {
     styles,
     components: {
         Button,
+        Container,
         Divider,
         DrawerCloseButton,
         Heading,

@@ -9,8 +9,8 @@ const TextPostCard = ({ heading, link, type }) => (
     <BaseCard link={ link } type={ type }>
         <Heading
             as="h4"
-            p={ 2 }
-            size="md"
+            p={ 3 }
+            size="sm"
             textAlign="center"
         >
             { heading }

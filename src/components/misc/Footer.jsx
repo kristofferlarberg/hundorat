@@ -9,12 +9,12 @@ import {
 
 const Footer = () => (
     <>
-        <Flex as="footer" justify="space-between" mt={ 6 }>
+        <Flex align="center" as="footer" justify="space-between">
             <Image alt="International league of antiquarian booksellers" boxSize="60px" src="/images/ilogo.png" />
             <Box>
-                <Text align="center">Antikvariat Hundörat</Text>
-                <Text align="center">070-770 40 20</Text>
-                <Link align="center" href="mailto: rarebooks@hundorat.se">rarebooks@hundorat.se</Link>
+                <Text my="0" fontSize="md" align="center">Antikvariat Hundörat</Text>
+                <Text my="0" fontSize="md" align="center">070-770 40 20</Text>
+                <Link my="0" fontSize="md" align="center" href="mailto: rarebooks@hundorat.se">rarebooks@hundorat.se</Link>
             </Box>
             <Image alt="Svenska Antikvariatföreningen" boxSize="60px" src="/images/svaf_logo.png" />
         </Flex>

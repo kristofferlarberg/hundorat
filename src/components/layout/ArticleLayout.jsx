@@ -19,7 +19,7 @@ const ArticleLayout = ({
         { src
             ? (
                 <Box as="figure">
-                    <Image alt={ alt } src={ src } w={ ['100vw', '100vw', '70vw', '60vw'] } />
+                    <Image alt={ alt } src={ src } w={ ['100vw', '100vw', '90vw', '60vw'] } />
                     <Heading
                         as="figcaption"
                         size="xs"
@@ -32,14 +32,16 @@ const ArticleLayout = ({
                 </Box>
             )
             : null }
-        { date ? <Heading as="h3" size="sm">{ date }</Heading> : null }
-        <Heading
-            as="h2"
-            size="xl"
-            textAlign="center"
-        >
-            { heading }
-        </Heading>
+        { date ? <Heading as="h3" size="md">{ date }</Heading> : null }
+        <Container maxW="container.sm">
+            <Heading
+                as="h2"
+                size="lg"
+                textAlign="center"
+            >
+                { heading }
+            </Heading>
+        </Container>
         <Container maxW="container.sm">
             { body }
         </Container>

@@ -36,7 +36,7 @@ const Stores = () => {
                 <VStack align="center" spacing={ 8 }>
                     <Heading
                         as="h2"
-                        size="xl"
+                        size="lg"
                         textAlign="center"
                     >
                         { RichText.asText(storesPage.page_title) }
@@ -47,35 +47,35 @@ const Stores = () => {
                                 <Slider>
                                     { store.data.store_images.map(image => (
                                         <Flex
-                                            justifyContent="center"
-                                            grow="0"
-                                            shrink="0"
-                                            basis="100%"
-                                            position="relative"
                                             key={ image.image.url }
+                                            basis="100%"
+                                            grow="0"
+                                            height="100%"
+                                            position="relative"
+                                            shrink="0"
                                         >
                                             <Image
                                                 alt={ image.image.alt }
                                                 src={ image.image.url }
-
+                                                width="100%"
                                             />
                                         </Flex>
                                     )) }
                                 </Slider>
                                 <Box key={ store.id } textAlign="center" w="100%">
-                                    <Heading as="h3" size="sm">
+                                    <Heading as="h3" size="md" m="0">
                                         { RichText.asText(store.data.store_name) }
                                     </Heading>
-                                    <Text>
+                                    <Text m="0">
                                         { RichText.asText(store.data.opening_hours_weekdays) }
                                     </Text>
-                                    <Text>
+                                    <Text m="0">
                                         { RichText.asText(store.data.opening_hours_weekends) }
                                     </Text>
                                     {
                                         RichText.asText(store.data.opening_hours_additional)
                                             ? (
-                                                <Text>
+                                                <Text m="0">
                                                     { RichText.asText(store.data.opening_hours_additional) }
                                                 </Text>
                                             ) : null

@@ -6,6 +6,7 @@ import {
     Center,
     Container,
     Divider,
+    Flex,
     Heading,
     Image,
     Text,
@@ -57,22 +58,33 @@ const Home = () => {
                 align="center"
                 spacing={ 12 }
             >
-                <Image alt={ homepage.image.alt } src={ homepage.image.url } />
-                <Box w="100%">
-                    <Container>
+                <Flex direction="column" align="center" w="100%">
+                    <Flex
+                        align="center"
+                        h="25rem"
+                        overflow="hidden"
+                        w={ ['100%', '100%', '90%', '70%', '60%', '60%'] }
+                    >
+                        <Image
+                            alt={ homepage.image.alt }
+                            src={ homepage.image.url }
+                            w="100%"
+                        />
+                    </Flex>
+                    <Container maxW="container.sm">
                         <RichText
                             render={ homepage.presentation }
                             linkResolver={ linkResolver }
                         />
                     </Container>
-                </Box>
+                </Flex>
                 <Divider />
                 <VStack
                     divider={ <Text mt={ 2.5 } mb={ 2 }>***</Text> }
                 >
                     { stores ? stores.map(item => (
                         <Box key={ item.id } textAlign="center" w="100%">
-                            <Heading as="h3" size="m" mb={ 0.5 }>
+                            <Heading as="h3" size="md" my={ 0 }>
                                 { RichText.asText(item.data.store_name) }
                             </Heading>
                             <Text m="0">
@@ -93,7 +105,7 @@ const Home = () => {
                     )) : null }
                 </VStack>
                 <Divider />
-                <Center>
+                <Center w="100%">
                     { newsPost.length > 0 ? (
                         <NewsPostCard
                             alt={ newsPost[0].data.image.alt }

@@ -4,10 +4,18 @@ const Button = {
         fontWeight: '500',
     },
     variants: {
-        white: {
-            backgroundColor: 'white',
+        nav: {
             border: '1px solid black',
             color: 'gray.800',
+            _hover: {
+                bg: 'white',
+            },
+        },
+        images: {
+            backgroundColor: 'white',
+            border: 0,
+            color: 'gray.800',
+            boxShadow: '0px 0 7px 1px gray',
         },
     },
 };

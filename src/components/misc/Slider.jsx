@@ -3,6 +3,7 @@ import { useEmblaCarousel } from 'embla-carousel/react';
 import {
     Button,
     Flex,
+    useMediaQuery,
     VStack,
 } from '@chakra-ui/react';
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons';
@@ -18,30 +19,32 @@ const Slider = ({ children }) => {
         if (emblaApi) emblaApi.scrollNext();
     }, [emblaApi]);
 
+    const [isLargerThan800] = useMediaQuery('(min-width: 800px)');
+
     return (
         <Flex
             alignItems="center"
-            justifyContent="center"
+            justify="center"
             mb={ 6 }
         >
-            <Button
-                colorScheme="gray.800"
-                left="50px"
-                onClick={ scrollPrev }
-                position="relative"
-                zIndex="1"
-                variant="white"
-            >
-                <ArrowBackIcon />
-            </Button>
+            { isLargerThan800 ? (
+                <Button
+                    left="60px"
+                    onClick={ scrollPrev }
+                    position="relative"
+                    zIndex="1"
+                    variant="images"
+                >
+                    <ArrowBackIcon />
+                </Button>
+            ) : null }
             { /* Container */ }
             <VStack
                 as="figure"
-                maxH={ ['300px', '300px', '400px', '400px', '500px'] }
-                mx={ 6 }
+                maxH={ ['300px', '400px', '500px', '500px'] }
                 overflow="hidden"
                 ref={ emblaRef }
-                w={ ['100%', '80%', '70%', '50%', '40%'] }
+                w={ ['100%', '100%', '100%', '60%'] }
             >
                 { /* Slider Body */ }
                 <Flex>
@@ -49,15 +52,17 @@ const Slider = ({ children }) => {
                     { children }
                 </Flex>
             </VStack>
-            <Button
-                left="-50px"
-                onClick={ scrollNext }
-                position="relative"
-                variant="white"
-                zIndex="1"
-            >
-                <ArrowForwardIcon />
-            </Button>
+            { isLargerThan800 ? (
+                <Button
+                    left="-60px"
+                    onClick={ scrollNext }
+                    position="relative"
+                    variant="images"
+                    zIndex="1"
+                >
+                    <ArrowForwardIcon />
+                </Button>
+            ) : null }
         </Flex>
     );
 };

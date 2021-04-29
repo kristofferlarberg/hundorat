@@ -1,6 +1,7 @@
-import { React } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Flex } from '@chakra-ui/react';
+
 import { ReactComponent as Hund } from './hund.svg';
 
 const Spinner = () => (
@@ -8,8 +9,8 @@ const Spinner = () => (
         w="100vw"
         maxW="100vw"
         maxH="100vh"
-        justifyContent="center"
-        alignItems="center"
+        justify="center"
+        align="center"
     >
         <motion.div
             w="500px"

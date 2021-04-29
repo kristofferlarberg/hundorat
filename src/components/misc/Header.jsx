@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link as PrismicLink, RichText } from 'prismic-reactjs';
 import { Link as RouterLink } from 'react-router-dom';
-import { EmailIcon } from '@chakra-ui/icons';
 import {
     Box,
     Button,
@@ -18,17 +17,20 @@ import {
     useDisclosure,
     StackDivider,
     Tooltip,
-    VisuallyHidden,
     VStack,
-    Wrap,
-    WrapItem,
+    HStack,
+    useMediaQuery,
+    Flex,
 } from '@chakra-ui/react';
 
+import { ReactComponent as Hund } from './hund.svg';
 import { linkResolver } from '../../prismic-configuration';
 
 const Header = ({ links }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const btnRef = React.useRef();
+
+    const [isLargerThan1000] = useMediaQuery('(min-width: 1000px)');
 
     return (
         <>
@@ -41,43 +43,59 @@ const Header = ({ links }) => {
                     pb={ 8 }
                     pt={ 6 }
                 >
-                    <Link as={ RouterLink } to="/" variant="subtle">
-                        <Heading align="center" as="h1" size="3xl" whiteSpace="break-spaces">
-                            Antikvariat Hundörat
-                        </Heading>
-                    </Link>
-                    <Wrap>
-                        <WrapItem>
-                            <Button colorScheme="gray.800" href="mailto: rarebooks@hundorat.se" onClick={ onOpen } ref={ btnRef } variant="outline">
-                                Öppna meny
-                            </Button>
-                        </WrapItem>
-                        <WrapItem>
-                            <Tooltip bg="gray.800" fontSize="md" hasArrow label="rarebooks@hundorat.se">
-                                <Link href="mailto:rarebooks@hundorat.se" variant="subtle">
-                                    <Button colorScheme="gray.800" variant="outline">
-                                        <VisuallyHidden>
+                    { isLargerThan1000
+                        ? (
+                            <HStack spacing={ 24 }>
+                                <Tooltip bg="gray.800" fontSize="md" hasArrow label="rarebooks@hundorat.se">
+                                    <Link href="mailto:rarebooks@hundorat.se" variant="subtle">
+                                        <Button borderColor="black" borderRadius="full" h="90px" p={ 1 } variant="nav" w="90px">
                                             Kontakt
-                                        </VisuallyHidden>
-                                        <EmailIcon />
-                                    </Button>
+                                        </Button>
+                                    </Link>
+                                </Tooltip>
+                                <Link as={ RouterLink } to="/" variant="subtle">
+                                    <Heading align="center" as="h1" size="xl" whiteSpace="break-spaces">
+                                        Antikvariat Hundörat
+                                    </Heading>
                                 </Link>
-                            </Tooltip>
-                        </WrapItem>
-                    </Wrap>
+                                <Button borderColor="black" href="mailto: rarebooks@hundorat.se" onClick={ onOpen } ref={ btnRef } variant="nav">
+                                    Öppna meny
+                                </Button>
+                            </HStack>
+                        ) : (
+                            <VStack spacing={ 3 }>
+                                <Link as={ RouterLink } to="/" variant="subtle">
+                                    <Heading align="center" as="h1" size="xl" whiteSpace="break-spaces">
+                                        Antikvariat Hundörat
+                                    </Heading>
+                                </Link>
+                                <Tooltip bg="gray.800" fontSize="md" hasArrow label="rarebooks@hundorat.se">
+                                    <Link href="mailto:rarebooks@hundorat.se" variant="subtle">
+                                        <Button borderColor="black" variant="nav">
+                                            Kontakt
+                                        </Button>
+                                    </Link>
+                                </Tooltip>
+                                <Button href="mailto: rarebooks@hundorat.se" onClick={ onOpen } ref={ btnRef } variant="nav">
+                                    Öppna meny
+                                </Button>
+                            </VStack>
+                        ) }
                 </VStack>
                 <Divider />
             </Box>
             <Drawer isOpen={ isOpen } onClose={ onClose } placement="top">
                 <DrawerOverlay>
-                    <DrawerContent pt={ 8 }>
+                    <DrawerContent pt={ 8 } bgColor="floralwhite">
                         <DrawerCloseButton />
                         <DrawerHeader>
-                            <Link as={ RouterLink } onClick={ onClose } to="/" variant="subtle">
-                                <Heading as="h1" size="3xl" align="center" whiteSpace="break-spaces">
-                                    Antikvariat Hundörat
-                                </Heading>
-                            </Link>
+                            <Flex justify="center" w="100%">
+                                <Box w="75px">
+                                    <Link as={ RouterLink } onClick={ onClose } to="/" variant="subtle">
+                                        <Hund />
+                                    </Link>
+                                </Box>
+                            </Flex>
                         </DrawerHeader>
                         <DrawerBody>
                             <VStack

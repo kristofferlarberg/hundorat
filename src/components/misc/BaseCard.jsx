@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+    Box,
     Center,
     Link,
 } from '@chakra-ui/react';
@@ -13,33 +14,39 @@ const BaseCard = ({ children, link, type }) => {
     };
 
     if (type === 'news') {
-        card.width = '50vw';
+        card.width = ['100%', '80%', '60%', '50%', '40%', '40%'];
+        card.border = '0';
+        card.color = 'none';
         card.height = 'auto';
-        card.color = 'white';
     }
     if (type === 'text') {
-        card.width = 80;
-        card.height = 96;
-        card.color = 'white';
+        card.color = 'floralwhite';
+        card.border = '1px';
+        card.height = ['500px'];
+        card.width = ['100%', '400px'];
     }
 
     return (
-        <Link
-            as={ RouterLink }
-            to={ link }
-            variant="subtle"
+        <Box
+            backgroundColor={ card.color }
+            border={ card.border }
+            borderColor="gray.800"
+            h={ card.height }
+            w={ card.width }
         >
-            <Center
-                border="1px"
-                h={ card.height }
-                backgroundColor={ card.color }
-                borderColor="gray.800"
-                p={ 6 }
-                w={ card.width }
+            <Link
+                as={ RouterLink }
+                to={ link }
+                variant="subtle"
             >
-                { children }
-            </Center>
-        </Link>
+                <Center
+                    h="100%"
+                    w="100%"
+                >
+                    { children }
+                </Center>
+            </Link>
+        </Box>
     );
 };
 

@@ -26,7 +26,7 @@ const NewsPostCard = ({
             />
             <Heading
                 as="h3"
-                size="sm"
+                size="md"
                 textAlign="center"
             >
                 { heading }

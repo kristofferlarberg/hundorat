@@ -26,7 +26,7 @@ const MainLayout = ({ children }) => {
     return (
         <>
             <Header links={ links } />
-            <Box mt={ 12 } mb={ 12 }>
+            <Box as="main" mt={ 12 } mb={ 24 } minH="100vh">
                 { children }
             </Box>
             <Footer />
