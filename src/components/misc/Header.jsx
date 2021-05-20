@@ -11,7 +11,6 @@ import {
     DrawerHeader,
     DrawerOverlay,
     DrawerContent,
-    DrawerCloseButton,
     Heading,
     Link,
     useDisclosure,
@@ -86,9 +85,13 @@ const Header = ({ links }) => {
             </Box>
             <Drawer isOpen={ isOpen } onClose={ onClose } placement="top">
                 <DrawerOverlay>
-                    <DrawerContent pt={ 8 } bgColor="floralwhite">
-                        <DrawerCloseButton />
-                        <DrawerHeader>
+                    <DrawerContent bgColor="floralwhite">
+                        <Flex justify="end" w="100%">
+                            <Button mr={ 4 } mt={ 4 } onClick={ onClose } variant="nav" w={ 10 }>
+                                x
+                            </Button>
+                        </Flex>
+                        <DrawerHeader p="0">
                             <Flex justify="center" w="100%">
                                 <Box w="75px">
                                     <Link as={ RouterLink } onClick={ onClose } to="/" variant="subtle">
