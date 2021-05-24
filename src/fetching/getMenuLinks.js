@@ -1,25 +1,37 @@
 import Prismic from '@prismicio/client';
 
 import { client } from '../prismic-configuration';
-import getActivitiesPage from './getActivitiesPage';
-import getNewsPage from './getNewsPage';
-import getStoresPage from './getStoresPage';
-import getTextsPage from './getTextsPage';
 
-const getLinks = async () => {
+const getMenuLinks = async () => {
     try {
         const menuData = await client.getSingle('menu');
 
-        const activitiesPage = await getActivitiesPage();
+        const activitiesPage = await client.getSingle(
+            'activities',
+            { fetch: ['activities.page_title', 'activities.uid'] },
+        );
 
-        const newsPage = await getNewsPage();
+        const newsPage = await client.getSingle(
+            'news',
+            { fetch: ['news.page_title', 'news.uid'] },
+        );
 
-        const textsPage = await getTextsPage();
+        const textsPage = await client.getSingle(
+            'texts',
+            { fetch: ['texts.page_title', 'texts.uid'] },
+        );
 
-        const storesPage = await getStoresPage();
+        const storesPage = await client.getSingle(
+            'stores',
+            { fetch: ['stores.page_title', 'stores.uid'] },
+        );
 
         const pages = await client.query(
-            Prismic.Predicates.at('document.type', 'page'),
+            Prismic.Predicates.at(
+                'document.type',
+                'page',
+                { fetch: ['page.page_title', 'page.uid'] },
+            ),
         );
 
         const pagesData = [
@@ -44,9 +56,8 @@ const getLinks = async () => {
             links.forEach((linkObj) => {
                 pagesData.forEach((pageObj) => {
                     if (pageObj.uid === linkObj.link.uid) {
-                        linksData.push(pageObj);
-                        const pageObjCopy = pageObj;
-                        pageObjCopy.link = linkObj.link;
+                        const { link } = linkObj;
+                        linksData.push({ ...pageObj, link });
                     }
                 });
             });
@@ -59,4 +70,4 @@ const getLinks = async () => {
     }
 };
 
-export default getLinks;
+export default getMenuLinks;

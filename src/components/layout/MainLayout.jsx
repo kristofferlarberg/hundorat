@@ -5,13 +5,13 @@ import {
 } from '@chakra-ui/react';
 
 import Footer from '../misc/Footer';
-import getLinks from '../../fetching/getLinks';
+import getMenuLinks from '../../fetching/getMenuLinks';
 import Header from '../misc/Header';
 import NotFound from '../pages/NotFound';
 import Spinner from '../misc/Spinner';
 
 const MainLayout = ({ children }) => {
-    const linksQuery = useQuery('links', getLinks);
+    const linksQuery = useQuery('links', getMenuLinks);
 
     if (linksQuery.isLoading) {
         return <Spinner />;
