@@ -25,7 +25,7 @@ import {
 
 import { linkResolver } from '../../prismic-configuration';
 
-const Header = ({ links }) => {
+const Header = ({ contact, links }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const btnRef = React.useRef();
 
@@ -68,14 +68,14 @@ const Header = ({ links }) => {
                                         Antikvariat Hundörat
                                     </Heading>
                                 </Link>
-                                <Tooltip bg="gray.800" fontSize="md" hasArrow label="rarebooks@hundorat.se">
-                                    <Link href="mailto:rarebooks@hundorat.se" variant="subtle">
+                                <Tooltip bg="gray.800" fontSize="md" hasArrow label={ RichText.asText(contact.email) }>
+                                    <Link href={ `mailto: ${RichText.asText(contact.email)}` } variant="subtle">
                                         <Button borderColor="black" variant="nav">
                                             Kontakt
                                         </Button>
                                     </Link>
                                 </Tooltip>
-                                <Button href="mailto: rarebooks@hundorat.se" onClick={ onOpen } ref={ btnRef } variant="nav">
+                                <Button onClick={ onOpen } ref={ btnRef } variant="nav">
                                     Öppna meny
                                 </Button>
                             </VStack>

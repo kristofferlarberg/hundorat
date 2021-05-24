@@ -5,6 +5,7 @@ import {
 } from '@chakra-ui/react';
 
 import Footer from '../misc/Footer';
+import getContact from '../../fetching/getContact';
 import getMenuLinks from '../../fetching/getMenuLinks';
 import Header from '../misc/Header';
 import NotFound from '../pages/NotFound';
@@ -12,24 +13,26 @@ import Spinner from '../misc/Spinner';
 
 const MainLayout = ({ children }) => {
     const linksQuery = useQuery('links', getMenuLinks);
+    const contactQuery = useQuery('contact', getContact);
 
-    if (linksQuery.isLoading) {
+    if (linksQuery.isLoading || contactQuery.isLoading) {
         return <Spinner />;
     }
 
-    if (linksQuery.isError) {
+    if (linksQuery.isError || contactQuery.isError) {
         return <NotFound />;
     }
 
     const links = linksQuery.data;
+    const contact = contactQuery.data.data;
 
     return (
         <>
-            <Header links={ links } />
+            <Header contact={ contact } links={ links } />
             <Box as="main" mt={ 12 } mb={ 24 } minH="100vh">
                 { children }
             </Box>
-            <Footer />
+            <Footer contact={ contact } />
         </>
     );
 };
