@@ -33,7 +33,7 @@ const Stores = () => {
     return (
         <>
             { storesPage && stores ? (
-                <VStack align="center" spacing={ 8 }>
+                <VStack align="center" spacing={ 12 }>
                     <Heading
                         as="h2"
                         size="lg"
@@ -66,12 +66,25 @@ const Stores = () => {
                                     <Heading as="h3" size="md" m="0">
                                         { RichText.asText(store.data.store_name) }
                                     </Heading>
-                                    <Text m="0">
-                                        { RichText.asText(store.data.opening_hours_weekdays) }
-                                    </Text>
-                                    <Text m="0">
-                                        { RichText.asText(store.data.opening_hours_weekends) }
-                                    </Text>
+                                    <Box mt={ 4 }>
+                                        <Text m="0">
+                                            { RichText.asText(store.data.address_1) }
+                                        </Text>
+                                        <Text m="0">
+                                            { RichText.asText(store.data.address_2) }
+                                        </Text>
+                                    </Box>
+                                    <Box mt={ 4 }>
+                                        <Text m="0">
+                                            { RichText.asText(store.data.opening_hours_weekends) }
+                                        </Text>
+                                        <Text m="0">
+                                            { RichText.asText(store.data.opening_hours_weekdays) }
+                                        </Text>
+                                        <Text m="0">
+                                            { RichText.asText(store.data.opening_hours_weekends) }
+                                        </Text>
+                                    </Box>
                                     {
                                         RichText.asText(store.data.opening_hours_additional)
                                             ? (
