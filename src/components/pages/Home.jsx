@@ -122,6 +122,7 @@ const Home = () => {
                 <Wrap justify="center" spacing={ 6 }>
                     { textPosts.length > 0 ? textPosts.map(post => (
                         <TextPostCard
+                            key={ post.id }
                             heading={ RichText.asText(post.data.title) }
                             link={ linkResolver(post) }
                             type="text"
