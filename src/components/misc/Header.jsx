@@ -12,6 +12,7 @@ import {
     DrawerOverlay,
     DrawerContent,
     Heading,
+    Image,
     Link,
     useDisclosure,
     StackDivider,
@@ -22,7 +23,6 @@ import {
     Flex,
 } from '@chakra-ui/react';
 
-import { ReactComponent as Hund } from './hund.svg';
 import { linkResolver } from '../../prismic-configuration';
 
 const Header = ({ links }) => {
@@ -93,11 +93,13 @@ const Header = ({ links }) => {
                         </Flex>
                         <DrawerHeader p="0">
                             <Flex justify="center" w="100%">
-                                <Box w="75px">
-                                    <Link as={ RouterLink } onClick={ onClose } to="/" variant="subtle">
-                                        <Hund />
-                                    </Link>
-                                </Box>
+                                <Link as={ RouterLink } onClick={ onClose } to="/" variant="subtle">
+                                    <Image
+                                        alt="Hundlogotyp"
+                                        h="150px"
+                                        src="/images/hund.png"
+                                    />
+                                </Link>
                             </Flex>
                         </DrawerHeader>
                         <DrawerBody>
