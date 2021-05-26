@@ -50,7 +50,7 @@ const Home = () => {
     const homepage = homepageQuery.data.data;
     const stores = storesQuery.data.results;
     const newsPost = newsPostsQuery.data.results;
-    const textPosts = textPostsQuery.data.results;
+    const textPosts = textPostsQuery.data.results.slice(0, 2);
 
     return (
         <>
