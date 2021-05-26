@@ -21,6 +21,8 @@ const NewsPost = ({ match }) => {
     }
 
     const newsPost = newsPostQuery.data;
+    const date = newsPost.first_publication_date;
+    const formattedDate = new Date(date).toLocaleDateString('sv-SV');
 
     return (
         <>
@@ -28,7 +30,7 @@ const NewsPost = ({ match }) => {
                 <ArticleLayout
                     alt={ newsPost.data.image.alt }
                     src={ newsPost.data.image.url }
-                    date={ newsPost.first_publication_date }
+                    date={ formattedDate }
                     caption={ RichText.asText(newsPost.data.image_caption) }
                     heading={ RichText.asText(newsPost.data.title) }
                     body={
