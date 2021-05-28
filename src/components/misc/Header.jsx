@@ -47,7 +47,7 @@ const Header = ({ contact, links }) => {
                             <HStack spacing={ 24 }>
                                 <Tooltip bg="gray.800" fontSize="md" hasArrow label="rarebooks@hundorat.se">
                                     <Link href="mailto:rarebooks@hundorat.se" variant="subtle">
-                                        <Button borderColor="black" borderRadius="full" h="90px" p={ 1 } variant="nav" w="90px">
+                                        <Button borderColor="black" borderRadius="full" h="90px" p={ 1 } variant="white" w="90px">
                                             Kontakt
                                         </Button>
                                     </Link>
@@ -57,7 +57,13 @@ const Header = ({ contact, links }) => {
                                         Antikvariat Hundörat
                                     </Heading>
                                 </Link>
-                                <Button borderColor="black" href="mailto: rarebooks@hundorat.se" onClick={ onOpen } ref={ btnRef } variant="nav">
+                                <Button
+                                    borderColor="black"
+                                    href="mailto: rarebooks@hundorat.se"
+                                    onClick={ onOpen }
+                                    ref={ btnRef }
+                                    variant="regular"
+                                >
                                     Öppna meny
                                 </Button>
                             </HStack>
@@ -70,12 +76,12 @@ const Header = ({ contact, links }) => {
                                 </Link>
                                 <Tooltip bg="gray.800" fontSize="md" hasArrow label={ RichText.asText(contact.email) }>
                                     <Link href={ `mailto: ${RichText.asText(contact.email)}` } variant="subtle">
-                                        <Button borderColor="black" variant="nav">
+                                        <Button borderColor="black" variant="regular">
                                             Kontakt
                                         </Button>
                                     </Link>
                                 </Tooltip>
-                                <Button onClick={ onOpen } ref={ btnRef } variant="nav">
+                                <Button onClick={ onOpen } ref={ btnRef } variant="regular">
                                     Öppna meny
                                 </Button>
                             </VStack>
@@ -87,7 +93,7 @@ const Header = ({ contact, links }) => {
                 <DrawerOverlay>
                     <DrawerContent bgColor="floralwhite">
                         <Flex justify="end" w="100%">
-                            <Button mr={ 4 } mt={ 4 } onClick={ onClose } variant="nav" w={ 10 }>
+                            <Button borderRadius="full" m={ 4 } onClick={ onClose } variant="transparent" w="50px" h="50px">
                                 x
                             </Button>
                         </Flex>

@@ -1,21 +1,36 @@
 const Button = {
     baseStyle: {
-        borderRadius: 'sm',
+        borderRadius: '0',
         fontWeight: '500',
     },
     variants: {
-        nav: {
+        images: {
+            backgroundColor: 'white',
+            border: 0,
+            borderRadius: 'sm',
+            color: 'gray.800',
+        },
+        regular: {
+            bg: 'none',
             border: '1px solid black',
             color: 'gray.800',
             _hover: {
                 bg: 'white',
             },
         },
-        images: {
-            backgroundColor: 'white',
-            border: 0,
+        transparent: {
+            bg: 'none',
+            border: '1px solid black',
             color: 'gray.800',
-            boxShadow: '0px 0 7px 1px gray',
+        },
+        white: {
+            bg: 'white',
+            color: 'gray.800',
+            _hover: {
+                bg: 'none',
+                border: '1px solid black',
+                color: 'gray.800',
+            },
         },
     },
 };
