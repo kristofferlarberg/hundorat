@@ -22,7 +22,6 @@ const styles = {
         },
         a: {
             color: 'red',
-            fontSize: ['lg', 'xl'],
         },
         ul: {
             margin: ['1.125rem', '1.25rem'],

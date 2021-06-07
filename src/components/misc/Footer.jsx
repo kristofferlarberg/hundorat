@@ -12,13 +12,13 @@ const Footer = ({ contact }) => (
         <Flex align="center" as="footer" justify="space-between">
             <Image alt="International league of antiquarian booksellers" boxSize="60px" src="/images/ilogo.png" />
             <Box>
-                <Text my="0" fontSize="md" align="center">
+                <Text my="0" align="center">
                     Antikvariat Hundörat
                 </Text>
-                <Text my="0" fontSize="md" align="center">
+                <Text my="0" align="center">
                     { contact.tel[0].text }
                 </Text>
-                <Link my="0" fontSize="md" align="center" href={ `mailto: ${contact.email[0].text}` }>
+                <Link my="0" align="center" href={ `mailto: ${contact.email[0].text}` }>
                     { contact.email[0].text }
                 </Link>
             </Box>
