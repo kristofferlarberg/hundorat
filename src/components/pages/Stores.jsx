@@ -3,11 +3,9 @@ import { RichText } from 'prismic-reactjs';
 import { useQuery } from 'react-query';
 import {
     Box,
-    Image,
+    Flex,
     Heading,
     Text,
-    VStack,
-    Flex,
 } from '@chakra-ui/react';
 
 import getStoresPage from '../../fetching/getStoresPage';
@@ -33,9 +31,10 @@ const Stores = () => {
     return (
         <>
             { storesPage && stores ? (
-                <VStack align="center" spacing={ 12 }>
+                <Flex direction="column" align="center">
                     <Heading
                         as="h2"
+                        mb={ 12 }
                         size="lg"
                         textAlign="center"
                     >
@@ -43,26 +42,9 @@ const Stores = () => {
                     </Heading>
                     <>
                         { stores.map(store => (
-                            <Box key={ store.id }>
-                                <Slider>
-                                    { store.data.store_images.map(image => (
-                                        <Flex
-                                            key={ image.image.url }
-                                            basis="100%"
-                                            grow="0"
-                                            height="100%"
-                                            position="relative"
-                                            shrink="0"
-                                        >
-                                            <Image
-                                                alt={ image.image.alt }
-                                                src={ image.image.url }
-                                                width="100%"
-                                            />
-                                        </Flex>
-                                    )) }
-                                </Slider>
-                                <Box key={ store.id } textAlign="center" w="100%">
+                            <>
+                                <Slider key={ store.id } store={ store } />
+                                <Box mt={ 6 } mb={ 12 } textAlign="center" w="100%">
                                     <Heading as="h3" size="md" m="0">
                                         { RichText.asText(store.data.store_name) }
                                     </Heading>
@@ -94,10 +76,10 @@ const Stores = () => {
                                             ) : null
                                     }
                                 </Box>
-                            </Box>
+                            </>
                         )) }
                     </>
-                </VStack>
+                </Flex>
             ) : null }
         </>
     );

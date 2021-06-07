@@ -1,14 +1,16 @@
 import { React, useCallback } from 'react';
 import { useEmblaCarousel } from 'embla-carousel/react';
 import {
+    Box,
     Button,
     Flex,
+    HStack,
+    Image,
     useMediaQuery,
-    VStack,
 } from '@chakra-ui/react';
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons';
 
-const Slider = ({ children }) => {
+const Slider = ({ store }) => {
     const [emblaRef, emblaApi] = useEmblaCarousel({ align: 'center' });
 
     const scrollPrev = useCallback(() => {
@@ -22,48 +24,53 @@ const Slider = ({ children }) => {
     const [isLargerThan800] = useMediaQuery('(min-width: 800px)');
 
     return (
-        <Flex
+        <Box
+            ref={ emblaRef }
+            background="white"
+            overflow="hidden"
+            w={ ['100%', '100%', '100%', '60%'] }
             alignItems="center"
             justify="center"
-            mb={ 6 }
+            p={ 4 }
         >
+            <Flex as="figure">
+                { store.data.store_images.map(image => (
+                    <Flex
+                        h={ ['300px', '400px', '500px', '500px'] }
+                        justify="center"
+                        key={ image.image.url }
+                        minW="100%"
+                        overflow="hidden"
+                        position="relative"
+                        mx={ 4 }
+                    >
+                        <Image
+                            alt={ image.image.alt }
+                            src={ image.image.url }
+                            maxW="none"
+                            minW="auto"
+                            h="100%"
+                        />
+                    </Flex>
+                )) }
+            </Flex>
             { isLargerThan800 ? (
-                <Button
-                    left="60px"
-                    onClick={ scrollPrev }
-                    position="relative"
-                    zIndex="1"
-                    variant="images"
-                >
-                    <ArrowBackIcon />
-                </Button>
+                <HStack justify="center" mt={ 2 }>
+                    <Button
+                        onClick={ scrollPrev }
+                        variant="images"
+                    >
+                        <ArrowBackIcon />
+                    </Button>
+                    <Button
+                        onClick={ scrollNext }
+                        variant="images"
+                    >
+                        <ArrowForwardIcon />
+                    </Button>
+                </HStack>
             ) : null }
-            { /* Container */ }
-            <VStack
-                as="figure"
-                maxH={ ['300px', '400px', '500px', '500px'] }
-                overflow="hidden"
-                ref={ emblaRef }
-                w={ ['100%', '100%', '100%', '60%'] }
-            >
-                { /* Slider Body */ }
-                <Flex>
-                    { /* Slides */ }
-                    { children }
-                </Flex>
-            </VStack>
-            { isLargerThan800 ? (
-                <Button
-                    left="-60px"
-                    onClick={ scrollNext }
-                    position="relative"
-                    variant="images"
-                    zIndex="1"
-                >
-                    <ArrowForwardIcon />
-                </Button>
-            ) : null }
-        </Flex>
+        </Box>
     );
 };
 
