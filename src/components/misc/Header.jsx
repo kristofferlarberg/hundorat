@@ -92,7 +92,7 @@ const Header = ({ contact, links }) => {
             <Drawer isOpen={ isOpen } onClose={ onClose } placement="top">
                 <DrawerOverlay>
                     <DrawerContent bgColor="floralwhite">
-                        <Flex justify="end" w="100%">
+                        <Flex justify="flex-end" w="100%">
                             <Button borderRadius="full" m={ 4 } onClick={ onClose } variant="transparent" w="50px" h="50px">
                                 x
                             </Button>
