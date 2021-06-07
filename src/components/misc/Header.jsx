@@ -47,7 +47,7 @@ const Header = ({ contact, links }) => {
                             <HStack spacing={ 24 }>
                                 <Tooltip bg="gray.800" fontSize="md" hasArrow label="rarebooks@hundorat.se">
                                     <Link href="mailto:rarebooks@hundorat.se" variant="subtle">
-                                        <Button borderColor="black" borderRadius="full" h="90px" p={ 1 } variant="white" w="90px">
+                                        <Button borderColor="black" borderRadius="full" h="90px" p={ 1 } variant="regular" w="90px">
                                             Kontakt
                                         </Button>
                                     </Link>
