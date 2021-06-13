@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons';
 
-const Slider = ({ store }) => {
+const Slider = ({ handleLoad, store }) => {
     const [emblaRef, emblaApi] = useEmblaCarousel({ align: 'center' });
 
     const scrollPrev = useCallback(() => {
@@ -50,6 +50,7 @@ const Slider = ({ store }) => {
                             maxW="none"
                             minW="auto"
                             h="100%"
+                            onLoad={ handleLoad }
                         />
                     </Flex>
                 )) }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { RichText } from 'prismic-reactjs';
 import { useQuery } from 'react-query';
 import {
@@ -16,6 +16,23 @@ import Slider from '../misc/Slider';
 const Stores = () => {
     const storesPageQuery = useQuery('stores', getStoresPage);
     const storesQuery = useQuery('store', getStores);
+    const [loaded, setLoaded] = useState(false);
+
+    const loadedImages = [];
+
+    const pageContentStyle = {
+        opacity: 0,
+    };
+    if (loaded) {
+        pageContentStyle.opacity = 1;
+    }
+
+    function handleLoad(image) {
+        loadedImages.push(image);
+        if (loadedImages.length === storesQuery.data.images_amount) {
+            setLoaded(true);
+        }
+    }
 
     if (storesPageQuery.isLoading || storesQuery.isLoading) {
         return null;
@@ -31,7 +48,7 @@ const Stores = () => {
     return (
         <>
             { storesPage && stores ? (
-                <Flex direction="column" align="center">
+                <Flex direction="column" align="center" opacity={ pageContentStyle.opacity }>
                     <Heading
                         as="h2"
                         mb={ 12 }
@@ -43,7 +60,7 @@ const Stores = () => {
                     <>
                         { stores.map(store => (
                             <>
-                                <Slider key={ store.id } store={ store } />
+                                <Slider key={ store.id } handleLoad={ () => handleLoad(store.id) } store={ store } />
                                 <Box mt={ 6 } mb={ 12 } textAlign="center" w="100%">
                                     <Heading as="h3" size="md" m="0">
                                         { RichText.asText(store.data.store_name) }

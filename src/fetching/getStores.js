@@ -7,7 +7,13 @@ const getStores = async () => {
             Prismic.Predicates.at('document.type', 'store'),
         );
 
-        return stores;
+        let imagesAmount = 0;
+        stores.results.forEach((store) => {
+            imagesAmount += store.data.store_images.length;
+        });
+
+        const storesWithImagesAmount = { ...stores, images_amount: imagesAmount };
+        return storesWithImagesAmount;
     }
     catch (error) {
         throw new Error('No data found');
