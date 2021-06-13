@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    Box,
+    Divider,
     Flex,
     Image,
     Link,
@@ -9,19 +9,20 @@ import {
 
 const Footer = ({ contact }) => (
     <>
-        <Flex align="center" as="footer" justify="space-between">
+        <Divider />
+        <Flex align="center" as="footer" justify="space-between" mt={ 6 }>
             <Image alt="International league of antiquarian booksellers" boxSize="60px" src="/images/ilogo.png" />
-            <Box>
-                <Text my="0" align="center">
+            <Flex direction="column">
+                <Text my={ 0 } fontSize="sm" align="center">
                     Antikvariat Hundörat
                 </Text>
-                <Text my="0" align="center">
+                <Text my={ 0 } fontSize="sm" align="center">
                     { contact.tel[0].text }
                 </Text>
-                <Link my="0" align="center" href={ `mailto: ${contact.email[0].text}` }>
+                <Link my="0" align="center" fontSize="sm" href={ `mailto: ${contact.email[0].text}` }>
                     { contact.email[0].text }
                 </Link>
-            </Box>
+            </Flex>
             <Image
                 alt="Svenska Antikvariatföreningen"
                 boxSize="60px"

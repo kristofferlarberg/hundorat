@@ -129,7 +129,6 @@ const Home = () => {
                         />
                     )) : null }
                 </Wrap>
-                <Divider />
             </VStack>
         </>
     );

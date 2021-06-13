@@ -29,7 +29,7 @@ const MainLayout = ({ children }) => {
     return (
         <>
             <Header contact={ contact } links={ links } />
-            <Box as="main" mt={ 12 } mb={ 24 } minH="100vh">
+            <Box as="main" mt={ 12 } mb={ 12 } minH="100vh">
                 { children }
             </Box>
             <Footer contact={ contact } />
