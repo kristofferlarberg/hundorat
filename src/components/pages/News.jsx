@@ -8,10 +8,13 @@ import NotFound from './NotFound';
 import NewsPostCard from '../misc/NewsPostCard';
 import { linkResolver } from '../../prismic-configuration';
 import BlogLayout from '../layout/BlogLayout';
+import { useHandleLoadImages } from '../../hooks';
 
 const News = () => {
     const newsPageQuery = useQuery('newsPage', getNewsPage);
     const newsPostsQuery = useQuery('newsPosts', getNewsPosts);
+
+    const { handleLoad, pageContentStyle } = useHandleLoadImages();
 
     if (newsPageQuery.isLoading || newsPostsQuery.isLoading) {
         return null;
@@ -25,10 +28,11 @@ const News = () => {
     const newsPosts = newsPostsQuery.data.results;
 
     return (
-        <BlogLayout heading={ RichText.asText(newsPage.page_title) }>
+        <BlogLayout heading={ RichText.asText(newsPage.page_title) } opacity={ pageContentStyle.opacity }>
             { newsPosts.length > 0 ? newsPosts.map(post => (
                 <NewsPostCard
                     alt={ post.data.image.alt }
+                    handleLoad={ () => handleLoad(newsPostsQuery.data.images_amount) }
                     heading={ RichText.asText(post.data.title) }
                     key={ post.id }
                     link={ linkResolver(post) }

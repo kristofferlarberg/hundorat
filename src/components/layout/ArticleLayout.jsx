@@ -10,6 +10,7 @@ import {
 const ArticleLayout = ({
     alt,
     date,
+    handleLoad,
     src,
     caption,
     heading,
@@ -19,7 +20,12 @@ const ArticleLayout = ({
         { src
             ? (
                 <Box as="figure">
-                    <Image alt={ alt } src={ src } w={ ['100vw', '100vw', '90vw', '60vw'] } />
+                    <Image
+                        alt={ alt }
+                        onLoad={ handleLoad }
+                        src={ src }
+                        w={ ['100vw', '100vw', '90vw', '60vw'] }
+                    />
                     <Heading
                         as="figcaption"
                         size="xs"

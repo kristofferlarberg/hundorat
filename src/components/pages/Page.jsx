@@ -9,11 +9,14 @@ import { linkResolver } from '../../prismic-configuration';
 import getPage from '../../fetching/getPage';
 import NotFound from './NotFound';
 import ArticleLayout from '../layout/ArticleLayout';
+import { useHandleLoadImages } from '../../hooks';
 
 const Page = ({ match }) => {
     const { uid } = match.params;
 
     const pageQuery = useQuery(['page', uid], () => getPage(uid));
+
+    const { handleLoad, pageContentStyle } = useHandleLoadImages();
 
     if (pageQuery.isLoading) {
         return null;
@@ -33,8 +36,10 @@ const Page = ({ match }) => {
                     src={ page.image.url }
                     date={ null }
                     caption={ RichText.asText(page.image_caption) }
+                    handleLoad={ () => handleLoad(pageQuery.data.images_amount) }
                     heading={ RichText.asText(page.page_title) }
                     body={ <RichText render={ page.text } linkResolver={ linkResolver } /> }
+                    opacity={ pageContentStyle.opacity }
                 />
             ) : <div>Not found</div> }
         </>

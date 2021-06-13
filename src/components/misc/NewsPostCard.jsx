@@ -11,6 +11,7 @@ import BaseCard from './BaseCard';
 const NewsPostCard = ({
     alt,
     date,
+    handleLoad,
     heading,
     link,
     src,
@@ -23,6 +24,7 @@ const NewsPostCard = ({
             <VStack spacing={ 0.2 } w="100%">
                 <Image
                     alt={ alt }
+                    onLoad={ handleLoad }
                     src={ src }
                     mb={ 1.5 }
                     w="100%"

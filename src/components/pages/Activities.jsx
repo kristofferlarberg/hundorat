@@ -7,9 +7,12 @@ import getActivities from '../../fetching/getActivities';
 import { linkResolver } from '../../prismic-configuration';
 import NotFound from './NotFound';
 import ArticleLayout from '../layout/ArticleLayout';
+import { useHandleLoadImages } from '../../hooks';
 
 const Activities = () => {
     const activitiesQuery = useQuery('activities', getActivities);
+
+    const { handleLoad, pageContentStyle } = useHandleLoadImages();
 
     if (activitiesQuery.isLoading) {
         return null;
@@ -22,13 +25,14 @@ const Activities = () => {
     const activities = activitiesQuery.data.results;
 
     return (
-        <VStack spacing={ 20 } divider={ <StackDivider borderColor="gray.800" /> }>
+        <VStack spacing={ 20 } divider={ <StackDivider borderColor="gray.800" /> } opacity={ pageContentStyle.opacity }>
             { activities.length > 0 ? activities.map(item => (
                 <Box key={ item.id }>
                     <ArticleLayout
                         alt={ item.data.image.alt }
                         src={ item.data.image.url }
                         date={ null }
+                        handleLoad={ () => handleLoad(activitiesQuery.data.images_amount) }
                         caption={ RichText.asText(item.data.image_caption) }
                         heading={ RichText.asText(item.data.page_title) }
                         body={

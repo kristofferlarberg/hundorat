@@ -7,7 +7,17 @@ const getNewsPosts = async () => {
             Prismic.Predicates.at('document.type', 'news_post'),
         );
 
-        return newsPosts;
+        let imagesAmount = 0;
+
+        newsPosts.results.forEach((newsPost) => {
+            if (newsPost.data.image.url) {
+                imagesAmount += 1;
+            }
+        });
+
+        const newsPostsWithAmount = { ...newsPosts, images_amount: imagesAmount };
+
+        return newsPostsWithAmount;
     }
     catch (error) {
         throw new Error('No data found');

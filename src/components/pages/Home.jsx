@@ -22,12 +22,15 @@ import { linkResolver } from '../../prismic-configuration';
 import NotFound from './NotFound';
 import NewsPostCard from '../misc/NewsPostCard';
 import TextPostCard from '../misc/TextPostCard';
+import { useHandleLoadImages } from '../../hooks';
 
 const Home = () => {
     const homepageQuery = useQuery('homepage', getHomepage);
     const newsPostsQuery = useQuery('newsPosts', getNewsPosts);
     const storesQuery = useQuery('stores', getStores);
     const textPostsQuery = useQuery('textPosts', fetchTextPosts);
+
+    const { handleLoad, pageContentStyle } = useHandleLoadImages();
 
     if (
         homepageQuery.isLoading
@@ -57,6 +60,7 @@ const Home = () => {
             <VStack
                 align="center"
                 spacing={ 12 }
+                opacity={ pageContentStyle.opacity }
             >
                 <Flex direction="column" align="center" w="100%">
                     <Flex
@@ -69,6 +73,7 @@ const Home = () => {
                             alt={ homepage.image.alt }
                             src={ homepage.image.url }
                             w="100%"
+                            onLoad={ () => handleLoad(1) }
                         />
                     </Flex>
                     <Container maxW="container.sm">
