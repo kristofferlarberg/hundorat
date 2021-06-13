@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { RichText } from 'prismic-reactjs';
 import { useQuery } from 'react-query';
 import {
@@ -12,27 +12,13 @@ import getStoresPage from '../../fetching/getStoresPage';
 import getStores from '../../fetching/getStores';
 import NotFound from './NotFound';
 import Slider from '../misc/Slider';
+import { useHandleLoadImages } from '../../hooks';
 
 const Stores = () => {
     const storesPageQuery = useQuery('stores', getStoresPage);
     const storesQuery = useQuery('store', getStores);
-    const [loaded, setLoaded] = useState(false);
 
-    const loadedImages = [];
-
-    const pageContentStyle = {
-        opacity: 0,
-    };
-    if (loaded) {
-        pageContentStyle.opacity = 1;
-    }
-
-    function handleLoad(image) {
-        loadedImages.push(image);
-        if (loadedImages.length === storesQuery.data.images_amount) {
-            setLoaded(true);
-        }
-    }
+    const { handleLoad, pageContentStyle } = useHandleLoadImages();
 
     if (storesPageQuery.isLoading || storesQuery.isLoading) {
         return null;
@@ -43,7 +29,7 @@ const Stores = () => {
     }
 
     const storesPage = storesPageQuery.data.data;
-    const stores = storesQuery.data.results;
+    const stores = storesQuery.data;
 
     return (
         <>
@@ -58,9 +44,9 @@ const Stores = () => {
                         { RichText.asText(storesPage.page_title) }
                     </Heading>
                     <>
-                        { stores.map(store => (
+                        { stores.results.map(store => (
                             <>
-                                <Slider key={ store.id } handleLoad={ () => handleLoad(store.id) } store={ store } />
+                                <Slider key={ store.id } handleLoad={ () => handleLoad(stores.images_amount) } store={ store } />
                                 <Box mt={ 6 } mb={ 12 } textAlign="center" w="100%">
                                     <Heading as="h3" size="md" m="0">
                                         { RichText.asText(store.data.store_name) }
