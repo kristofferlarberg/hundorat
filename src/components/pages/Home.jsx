@@ -105,20 +105,22 @@ const Home = () => {
                     )) : null }
                 </VStack>
                 <Divider />
-                <Center w="100%">
-                    { newsPost.length > 0 ? (
-                        <NewsPostCard
-                            alt={ newsPost[0].data.image.alt }
-                            heading={ RichText.asText(newsPost[0].data.title) }
-                            key={ newsPost[0].id }
-                            link={ linkResolver(newsPost[0]) }
-                            src={ newsPost[0].data.image.url }
-                            date={ newsPost[0].first_publication_date }
-                            type="news"
-                        />
-                    ) : null }
-                </Center>
-                <Divider />
+                { newsPost.length > 0 ? (
+                    <>
+                        <Center w="100%">
+                            <NewsPostCard
+                                alt={ newsPost[0].data.image.alt }
+                                heading={ RichText.asText(newsPost[0].data.title) }
+                                key={ newsPost[0].id }
+                                link={ linkResolver(newsPost[0]) }
+                                src={ newsPost[0].data.image.url }
+                                date={ newsPost[0].first_publication_date }
+                                type="news"
+                            />
+                        </Center>
+                        <Divider />
+                    </>
+                ) : null }
                 <Wrap justify="center" spacing={ 6 }>
                     { textPosts.length > 0 ? textPosts.map(post => (
                         <TextPostCard
