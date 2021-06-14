@@ -15,8 +15,8 @@ import Slider from '../misc/Slider';
 import { useHandleLoadImages } from '../../hooks';
 
 const Stores = () => {
-    const storesPageQuery = useQuery('stores', getStoresPage);
-    const storesQuery = useQuery('store', getStores);
+    const storesPageQuery = useQuery('storesPage', getStoresPage);
+    const storesQuery = useQuery('stores', getStores);
 
     const { handleLoad, pageContentStyle } = useHandleLoadImages();
 
@@ -47,7 +47,7 @@ const Stores = () => {
                         { stores.results.map(store => (
                             <>
                                 <Slider key={ store.id } handleLoad={ () => handleLoad(stores.images_amount) } store={ store } />
-                                <Box mt={ 6 } mb={ 12 } textAlign="center" w="100%">
+                                <Box mt={ 6 } mb={ 12 } textAlign="center" w={ ['100%', '100%', '60%', '30%'] }>
                                     <Heading as="h3" size="md" m="0">
                                         { RichText.asText(store.data.store_name) }
                                     </Heading>
@@ -60,24 +60,21 @@ const Stores = () => {
                                         </Text>
                                     </Box>
                                     <Box mt={ 4 }>
-                                        <Text m="0">
-                                            { RichText.asText(store.data.opening_hours_weekends) }
-                                        </Text>
-                                        <Text m="0">
-                                            { RichText.asText(store.data.opening_hours_weekdays) }
-                                        </Text>
-                                        <Text m="0">
-                                            { RichText.asText(store.data.opening_hours_weekends) }
-                                        </Text>
+                                        { store.data.opening_hours.map(period => (
+                                            <Text m="0">
+                                                { period.start_day !== period.end_day
+                                                    ? `${period.start_day}–${period.end_day} ${period.start_time}–${period.end_time}`
+                                                    : `${period.start_day} ${period.start_time}–${period.end_time}` }
+                                            </Text>
+                                        )) }
                                     </Box>
-                                    {
-                                        RichText.asText(store.data.opening_hours_additional)
-                                            ? (
-                                                <Text m="0">
-                                                    { RichText.asText(store.data.opening_hours_additional) }
-                                                </Text>
-                                            ) : null
-                                    }
+                                    { store.data.additional_information.length > 0 ? (
+                                        <Box border="1px solid" borderColor="gray.800" mt={ 4 } p={ 4 }>
+                                            <Text fontSize="sm" my={ 0 }>
+                                                { RichText.asText(store.data.additional_information) }
+                                            </Text>
+                                        </Box>
+                                    ) : null }
                                 </Box>
                             </>
                         )) }

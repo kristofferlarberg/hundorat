@@ -87,25 +87,18 @@ const Home = () => {
                 <VStack
                     divider={ <Text mt={ 2.5 } mb={ 2 }>***</Text> }
                 >
-                    { stores ? stores.map(item => (
-                        <Box key={ item.id } textAlign="center" w="100%">
+                    { stores ? stores.map(store => (
+                        <Box key={ store.id } textAlign="center" w="100%">
                             <Heading as="h3" size="md" my={ 0 }>
-                                { RichText.asText(item.data.store_name) }
+                                { RichText.asText(store.data.store_name) }
                             </Heading>
-                            <Text m="0">
-                                { RichText.asText(item.data.opening_hours_weekdays) }
-                            </Text>
-                            <Text m="0">
-                                { RichText.asText(item.data.opening_hours_weekends) }
-                            </Text>
-                            {
-                                RichText.asText(item.data.opening_hours_additional)
-                                    ? (
-                                        <Text m="0">
-                                            { RichText.asText(item.data.opening_hours_additional) }
-                                        </Text>
-                                    ) : null
-                            }
+                            { store.data.opening_hours.map(period => (
+                                <Text m="0">
+                                    { period.start_day !== period.end_day
+                                        ? `${period.start_day}–${period.end_day} ${period.start_time}.00–${period.end_time}.00`
+                                        : `${period.start_day} ${period.start_time}.00–${period.end_time}.00` }
+                                </Text>
+                            )) }
                         </Box>
                     )) : null }
                 </VStack>
