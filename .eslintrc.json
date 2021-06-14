@@ -4,12 +4,10 @@
         "es6": true
     },
     "extends": [
-        "airbnb"
+        "react-app",
+        "airbnb",
+        "plugin:jsx-a11y/recommended"
     ],
-    "globals": {
-        "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
-    },
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
@@ -18,24 +16,42 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "jsx-a11y"
     ],
     "rules": {
-        "arrow-body-style": ["error", "as-needed"],
-        "arrow-parens": ["error", "as-needed", {"requireForBlockBody": true }],
-        "brace-style": ["error", "stroustrup"],
-        "indent": ["error", 4],
-        "max-len": ["error", { "code": 150 }],
-        "object-curly-spacing": [2, "always"],
-        "react/jsx-curly-spacing": ["error", {
-            "children": true,
-            "spacing": {
-                "objectLiterals": "never"
-            },
-            "when": "always"
+        "react/jsx-sort-props": ["error", {
+            "ignoreCase": true,
+            "reservedFirst": true
         }],
-        "react/jsx-indent": [2, 4],
-        "react/jsx-indent-props": [2, 4],
-        "react/prop-types": "off"
-    }
+        "sort-keys": "error",
+        "sort-imports": ["error", {
+            "allowSeparatedGroups": true,
+            "ignoreCase": true,
+            "memberSyntaxSortOrder": ["none", "all", "single", "multiple"]
+        }]
+    },
+    "overrides": [
+        {
+            "files": ["**/*.js", "**/*.jsx"],
+            "rules": {
+                "arrow-body-style": ["error", "as-needed"],
+                "arrow-parens": ["error", "as-needed", {"requireForBlockBody": true}],
+                "brace-style": ["error", "stroustrup"],
+                "indent": ["error", 4],
+                "linebreak-style": "off",
+                "max-len": ["error", { "code": 150 }],
+                "object-curly-spacing": ["error", "always"],
+                "react/jsx-indent": ["error", 4],
+                "react/jsx-indent-props": ["error", 4],
+                "react/jsx-curly-spacing": ["error", {
+                    "children": true,
+                    "spacing": {
+                        "objectLiterals": "never"
+                    },
+                    "when": "always"
+                }],
+                "react/prop-types": "off"
+            }
+        }
+    ]
 }
