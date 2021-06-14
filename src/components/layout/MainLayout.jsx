@@ -1,8 +1,6 @@
+import { Box } from '@chakra-ui/react';
 import React from 'react';
 import { useQuery } from 'react-query';
-import {
-    Box,
-} from '@chakra-ui/react';
 
 import Footer from '../misc/Footer';
 import getContact from '../../fetching/getContact';
@@ -29,7 +27,7 @@ const MainLayout = ({ children }) => {
     return (
         <>
             <Header contact={ contact } links={ links } />
-            <Box as="main" mt={ 12 } mb={ 12 } minH="100vh">
+            <Box as="main" mb={ 12 } minH="100vh" mt={ 12 }>
                 { children }
             </Box>
             <Footer contact={ contact } />

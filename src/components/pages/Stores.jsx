@@ -8,8 +8,8 @@ import {
     Text,
 } from '@chakra-ui/react';
 
-import getStoresPage from '../../fetching/getStoresPage';
 import getStores from '../../fetching/getStores';
+import getStoresPage from '../../fetching/getStoresPage';
 import NotFound from './NotFound';
 import Slider from '../misc/Slider';
 import { useHandleLoadImages } from '../../hooks';
@@ -34,7 +34,7 @@ const Stores = () => {
     return (
         <>
             { storesPage && stores ? (
-                <Flex direction="column" align="center" opacity={ pageContentStyle.opacity }>
+                <Flex align="center" direction="column" opacity={ pageContentStyle.opacity }>
                     <Heading
                         as="h2"
                         mb={ 12 }
@@ -47,8 +47,8 @@ const Stores = () => {
                         { stores.results.map(store => (
                             <>
                                 <Slider key={ store.id } handleLoad={ () => handleLoad(stores.images_amount) } store={ store } />
-                                <Box mt={ 6 } mb={ 12 } textAlign="center" w={ ['100%', '100%', '60%', '30%'] }>
-                                    <Heading as="h3" size="md" m="0">
+                                <Box mb={ 12 } mt={ 6 } textAlign="center" w={ ['100%', '100%', '60%', '30%'] }>
+                                    <Heading as="h3" m="0" size="md">
                                         { RichText.asText(store.data.store_name) }
                                     </Heading>
                                     <Box mt={ 4 }>

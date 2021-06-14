@@ -9,11 +9,6 @@ import Link from './components/link';
 import styles from './styles';
 
 const overrides = {
-    fonts: {
-        heading: 'Spectral',
-        body: 'Spectral',
-    },
-    styles,
     components: {
         Button,
         Container,
@@ -22,6 +17,11 @@ const overrides = {
         Heading,
         Link,
     },
+    fonts: {
+        body: 'Spectral',
+        heading: 'Spectral',
+    },
+    styles,
 };
 
 export default extendTheme(overrides);

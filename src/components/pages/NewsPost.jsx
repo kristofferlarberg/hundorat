@@ -1,11 +1,11 @@
 import React from 'react';
-import { useQuery } from 'react-query';
 import { RichText } from 'prismic-reactjs';
+import { useQuery } from 'react-query';
 
-import { linkResolver } from '../../prismic-configuration';
-import getNewsPost from '../../fetching/getNewsPost';
-import NotFound from './NotFound';
 import ArticleLayout from '../layout/ArticleLayout';
+import getNewsPost from '../../fetching/getNewsPost';
+import { linkResolver } from '../../prismic-configuration';
+import NotFound from './NotFound';
 import { useHandleLoadImages } from '../../hooks';
 
 const NewsPost = ({ match }) => {
@@ -32,15 +32,15 @@ const NewsPost = ({ match }) => {
             { newsPost ? (
                 <ArticleLayout
                     alt={ newsPost.data.image.alt }
-                    src={ newsPost.data.image.url }
-                    date={ formattedDate }
+                    body={
+                        <RichText linkResolver={ linkResolver } render={ newsPost.data.text } />
+                    }
                     caption={ RichText.asText(newsPost.data.image_caption) }
+                    date={ formattedDate }
                     handleLoad={ () => handleLoad(newsPost.images_amount) }
                     heading={ RichText.asText(newsPost.data.title) }
-                    body={
-                        <RichText render={ newsPost.data.text } linkResolver={ linkResolver } />
-                    }
                     opacity={ pageContentStyle.opacity }
+                    src={ newsPost.data.image.url }
                 />
             ) : null }
         </>

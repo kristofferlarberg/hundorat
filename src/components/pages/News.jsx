@@ -2,12 +2,12 @@ import React from 'react';
 import { RichText } from 'prismic-reactjs';
 import { useQuery } from 'react-query';
 
+import BlogLayout from '../layout/BlogLayout';
 import getNewsPage from '../../fetching/getNewsPage';
 import getNewsPosts from '../../fetching/getNewsPosts';
-import NotFound from './NotFound';
-import NewsPostCard from '../misc/NewsPostCard';
 import { linkResolver } from '../../prismic-configuration';
-import BlogLayout from '../layout/BlogLayout';
+import NewsPostCard from '../misc/NewsPostCard';
+import NotFound from './NotFound';
 import { useHandleLoadImages } from '../../hooks';
 
 const News = () => {
@@ -31,13 +31,13 @@ const News = () => {
         <BlogLayout heading={ RichText.asText(newsPage.page_title) } opacity={ pageContentStyle.opacity }>
             { newsPosts.length > 0 ? newsPosts.map(post => (
                 <NewsPostCard
+                    key={ post.id }
                     alt={ post.data.image.alt }
+                    date={ post.first_publication_date }
                     handleLoad={ () => handleLoad(newsPostsQuery.data.images_amount) }
                     heading={ RichText.asText(post.data.title) }
-                    key={ post.id }
                     link={ linkResolver(post) }
                     src={ post.data.image.url }
-                    date={ post.first_publication_date }
                     type="news"
                 />
             )) : 'Det finns inga inlägg för tillfället.' }

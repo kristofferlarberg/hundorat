@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
 import qs from 'qs';
+import { useEffect } from 'react';
 
 import { client, linkResolver } from '../../prismic-configuration';
 

@@ -11,12 +11,12 @@ const Button = {
             color: 'gray.800',
         },
         regular: {
-            bg: 'none',
-            border: '1px solid black',
-            color: 'gray.800',
             _hover: {
                 bg: 'white',
             },
+            bg: 'none',
+            border: '1px solid black',
+            color: 'gray.800',
         },
         transparent: {
             bg: 'none',

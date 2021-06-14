@@ -1,4 +1,5 @@
 import Prismic from '@prismicio/client';
+
 import { client } from '../prismic-configuration';
 
 const getActivities = async () => {

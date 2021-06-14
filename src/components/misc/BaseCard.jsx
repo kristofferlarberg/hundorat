@@ -1,16 +1,16 @@
 import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import {
     Box,
     Center,
     Link,
 } from '@chakra-ui/react';
-import { Link as RouterLink } from 'react-router-dom';
 
 const BaseCard = ({ children, link, type }) => {
     const card = {
-        width: null,
-        height: null,
         color: null,
+        height: null,
+        width: null,
     };
 
     if (type === 'news') {

@@ -1,14 +1,11 @@
 import React from 'react';
-import { useQuery } from 'react-query';
 import { RichText } from 'prismic-reactjs';
-/* import {
-    Text,
-} from '@chakra-ui/react'; */
+import { useQuery } from 'react-query';
 
-import { linkResolver } from '../../prismic-configuration';
-import getPage from '../../fetching/getPage';
-import NotFound from './NotFound';
 import ArticleLayout from '../layout/ArticleLayout';
+import getPage from '../../fetching/getPage';
+import { linkResolver } from '../../prismic-configuration';
+import NotFound from './NotFound';
 import { useHandleLoadImages } from '../../hooks';
 
 const Page = ({ match }) => {
@@ -33,13 +30,13 @@ const Page = ({ match }) => {
             { page ? (
                 <ArticleLayout
                     alt={ page.image.alt }
-                    src={ page.image.url }
-                    date={ null }
+                    body={ <RichText linkResolver={ linkResolver } render={ page.text } /> }
                     caption={ RichText.asText(page.image_caption) }
+                    date={ null }
                     handleLoad={ () => handleLoad(pageQuery.data.images_amount) }
                     heading={ RichText.asText(page.page_title) }
-                    body={ <RichText render={ page.text } linkResolver={ linkResolver } /> }
                     opacity={ pageContentStyle.opacity }
+                    src={ page.image.url }
                 />
             ) : <div>Not found</div> }
         </>

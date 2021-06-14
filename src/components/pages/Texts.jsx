@@ -1,15 +1,13 @@
 import React from 'react';
 import { RichText } from 'prismic-reactjs';
 import { useQuery } from 'react-query';
-import {
-    WrapItem,
-} from '@chakra-ui/react';
+import { WrapItem } from '@chakra-ui/react';
 
-import getTextsPage from '../../fetching/getTextsPage';
-import getTextPosts from '../../fetching/getTextPosts';
-import NotFound from './NotFound';
-import { linkResolver } from '../../prismic-configuration';
 import BlogLayout from '../layout/BlogLayout';
+import getTextPosts from '../../fetching/getTextPosts';
+import getTextsPage from '../../fetching/getTextsPage';
+import { linkResolver } from '../../prismic-configuration';
+import NotFound from './NotFound';
 import TextPostCard from '../misc/TextPostCard';
 
 const Texts = () => {

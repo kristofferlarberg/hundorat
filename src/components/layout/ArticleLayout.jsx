@@ -1,10 +1,10 @@
 import React from 'react';
 import {
     Box,
-    Image,
-    Heading,
-    VStack,
     Container,
+    Heading,
+    Image,
+    VStack,
 } from '@chakra-ui/react';
 
 const ArticleLayout = ({
@@ -28,10 +28,10 @@ const ArticleLayout = ({
                     />
                     <Heading
                         as="figcaption"
-                        size="xs"
-                        textAlign="right"
                         mr={ 6 }
                         mt={ 0 }
+                        size="xs"
+                        textAlign="right"
                     >
                         { caption }
                     </Heading>

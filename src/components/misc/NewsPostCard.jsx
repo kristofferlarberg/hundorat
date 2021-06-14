@@ -24,9 +24,9 @@ const NewsPostCard = ({
             <VStack spacing={ 0.2 } w="100%">
                 <Image
                     alt={ alt }
+                    mb={ 1.5 }
                     onLoad={ handleLoad }
                     src={ src }
-                    mb={ 1.5 }
                     w="100%"
                 />
                 <Heading

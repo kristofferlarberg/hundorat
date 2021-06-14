@@ -7,8 +7,8 @@ import {
     QueryClient,
     QueryClientProvider,
 } from 'react-query';
-import { apiEndpoint } from './prismic-configuration';
 
+import { apiEndpoint } from './prismic-configuration';
 import MainLayout from './components/layout/MainLayout';
 import theme from './theme';
 import {
@@ -20,8 +20,8 @@ import {
     Page,
     Preview,
     Stores,
-    Texts,
     TextPost,
+    Texts,
 } from './components/pages';
 
 import '@fontsource/spectral/400.css';
@@ -48,15 +48,15 @@ const App = () => {
                 <BrowserRouter>
                     <Switch>
                         <MainLayout>
-                            <Route exact path="/" component={ Home } />
-                            <Route exact path="/butiker" component={ Stores } />
-                            <Route exact path="/nyheter" component={ News } />
-                            <Route exact path="/nyheter/:uid" component={ NewsPost } />
-                            <Route exact path="/preview" component={ Preview } />
-                            <Route exact path="/texter" component={ Texts } />
-                            <Route exact path="/texter/:uid" component={ TextPost } />
-                            <Route exact path="/ytterligare-aktivitet" component={ Activities } />
-                            <Route exact path="/pages/:uid" component={ Page } />
+                            <Route component={ Home } exact path="/" />
+                            <Route component={ Stores } exact path="/butiker" />
+                            <Route component={ News } exact path="/nyheter" />
+                            <Route component={ NewsPost } exact path="/nyheter/:uid" />
+                            <Route component={ Preview } exact path="/preview" />
+                            <Route component={ Texts } exact path="/texter" />
+                            <Route component={ TextPost } exact path="/texter/:uid" />
+                            <Route component={ Activities } exact path="/ytterligare-aktivitet" />
+                            <Route component={ Page } exact path="/pages/:uid" />
                         </MainLayout>
                         <Route component={ NotFound } />
                     </Switch>

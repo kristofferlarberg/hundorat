@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link as PrismicLink, RichText } from 'prismic-reactjs';
 import { Link as RouterLink } from 'react-router-dom';
 import {
     Box,
@@ -8,20 +7,21 @@ import {
     Divider,
     Drawer,
     DrawerBody,
+    DrawerContent,
     DrawerHeader,
     DrawerOverlay,
-    DrawerContent,
+    Flex,
     Heading,
+    HStack,
     Image,
     Link,
-    useDisclosure,
     StackDivider,
     Tooltip,
-    VStack,
-    HStack,
+    useDisclosure,
     useMediaQuery,
-    Flex,
+    VStack,
 } from '@chakra-ui/react';
+import { Link as PrismicLink, RichText } from 'prismic-reactjs';
 
 import { linkResolver } from '../../prismic-configuration';
 
@@ -37,10 +37,10 @@ const Header = ({ contact, links }) => {
                 <VStack
                     align="center"
                     borderBottom="4px"
-                    spacing={ 4 }
                     mb="4px"
                     pb={ 8 }
                     pt={ 6 }
+                    spacing={ 4 }
                 >
                     { isLargerThan1000
                         ? (
@@ -58,10 +58,10 @@ const Header = ({ contact, links }) => {
                                     </Heading>
                                 </Link>
                                 <Button
+                                    ref={ btnRef }
                                     borderColor="black"
                                     href="mailto: rarebooks@hundorat.se"
                                     onClick={ onOpen }
-                                    ref={ btnRef }
                                     variant="regular"
                                 >
                                     Öppna meny
@@ -81,7 +81,7 @@ const Header = ({ contact, links }) => {
                                         </Button>
                                     </Link>
                                 </Tooltip>
-                                <Button onClick={ onOpen } ref={ btnRef } variant="regular">
+                                <Button ref={ btnRef } onClick={ onOpen } variant="regular">
                                     Öppna meny
                                 </Button>
                             </VStack>
@@ -93,7 +93,7 @@ const Header = ({ contact, links }) => {
                 <DrawerOverlay>
                     <DrawerContent bgColor="floralwhite">
                         <Flex justify="flex-end" w="100%">
-                            <Button borderRadius="full" m={ 4 } onClick={ onClose } variant="transparent" w="50px" h="50px">
+                            <Button borderRadius="full" h="50px" m={ 4 } onClick={ onClose } variant="transparent" w="50px">
                                 x
                             </Button>
                         </Flex>
@@ -110,14 +110,14 @@ const Header = ({ contact, links }) => {
                         </DrawerHeader>
                         <DrawerBody>
                             <VStack
+                                align="stretch"
                                 divider={ <StackDivider borderColor="gray.800" /> }
                                 spacing={ 1 }
-                                align="stretch"
                             >
                                 { links ? links.map(item => (
                                     <Link
-                                        as={ RouterLink }
                                         key={ item.link.id }
+                                        as={ RouterLink }
                                         onClick={ onClose }
                                         to={ PrismicLink.url(item.link, linkResolver) }
                                         variant="subtle"

@@ -1,10 +1,10 @@
 const Link = {
     variants: {
         subtle: {
-            color: 'gray.800',
             _hover: {
                 textDecoration: 'none',
             },
+            color: 'gray.800',
         },
     },
 };

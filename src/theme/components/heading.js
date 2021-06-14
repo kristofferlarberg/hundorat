@@ -1,3 +1,5 @@
+/* eslint-disable sort-keys */
+
 const Heading = {
     baseStyle: {
         fontWeight: '400',

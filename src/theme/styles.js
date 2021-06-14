@@ -1,24 +1,24 @@
+/* eslint-disable sort-keys */
+
 const styles = {
     // Global styles used in RichText, for <p> and <a>
     global: {
         body: {
             backgroundColor: 'antiqueWhite',
-            /* display: 'flex',
-            flexDirection: 'column', */
             fontSize: ['lg', 'null', 'xl'],
-            minHeight: '100vh',
             margin: '4',
+            minHeight: '100vh',
         },
         p: {
-            marginTop: ['1.125rem', 'null', '1.25rem'],
             marginBottom: ['1.125rem', 'null', '1.25rem'],
+            marginTop: ['1.125rem', 'null', '1.25rem'],
         },
         h3: {
-            fontWeight: '500',
-            textTransform: 'uppercase',
             fontSize: ['lg', 'null', 'xl'],
-            marginTop: ['1.125rem', '1.25rem'],
+            fontWeight: '500',
             marginBottom: ['1rem', '1.125rem'],
+            marginTop: ['1.125rem', '1.25rem'],
+            textTransform: 'uppercase',
         },
         a: {
             color: 'red',

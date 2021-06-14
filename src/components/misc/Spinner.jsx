@@ -1,26 +1,26 @@
-import React from 'react';
-import { motion } from 'framer-motion';
 import { Flex } from '@chakra-ui/react';
+import { motion } from 'framer-motion';
+import React from 'react';
 
 import { ReactComponent as Pil } from './pil.svg';
 
 const Spinner = () => (
     <Flex
+        align="center"
         h="100vh"
         justify="center"
-        align="center"
     >
         <motion.div
             animate={{
-                rotate: [0, 360],
                 backgroundColor: 'transparent',
+                rotate: [0, 360],
             }}
             transition={{
                 duration: 0.5,
                 ease: 'easeInOut',
-                times: [0, 1],
                 loop: Infinity,
                 repeatDelay: 0,
+                times: [0, 1],
             }}
         >
             <Pil />

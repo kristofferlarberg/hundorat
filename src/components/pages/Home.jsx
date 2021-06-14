@@ -1,6 +1,6 @@
 import React from 'react';
-import { useQuery } from 'react-query';
 import { RichText } from 'prismic-reactjs';
+import { useQuery } from 'react-query';
 import {
     Box,
     Center,
@@ -14,13 +14,13 @@ import {
     Wrap,
 } from '@chakra-ui/react';
 
+import fetchTextPosts from '../../fetching/getTextPosts';
 import getHomepage from '../../fetching/getHomepage';
 import getNewsPosts from '../../fetching/getNewsPosts';
 import getStores from '../../fetching/getStores';
-import fetchTextPosts from '../../fetching/getTextPosts';
 import { linkResolver } from '../../prismic-configuration';
-import NotFound from './NotFound';
 import NewsPostCard from '../misc/NewsPostCard';
+import NotFound from './NotFound';
 import TextPostCard from '../misc/TextPostCard';
 import { useHandleLoadImages } from '../../hooks';
 
@@ -59,10 +59,10 @@ const Home = () => {
         <>
             <VStack
                 align="center"
-                spacing={ 12 }
                 opacity={ pageContentStyle.opacity }
+                spacing={ 12 }
             >
-                <Flex direction="column" align="center" w="100%">
+                <Flex align="center" direction="column" w="100%">
                     <Flex
                         align="center"
                         h="25rem"
@@ -71,25 +71,25 @@ const Home = () => {
                     >
                         <Image
                             alt={ homepage.image.alt }
+                            onLoad={ () => handleLoad(1) }
                             src={ homepage.image.url }
                             w="100%"
-                            onLoad={ () => handleLoad(1) }
                         />
                     </Flex>
                     <Container maxW="container.sm">
                         <RichText
-                            render={ homepage.presentation }
                             linkResolver={ linkResolver }
+                            render={ homepage.presentation }
                         />
                     </Container>
                 </Flex>
                 <Divider />
                 <VStack
-                    divider={ <Text mt={ 2.5 } mb={ 2 }>***</Text> }
+                    divider={ <Text mb={ 2 } mt={ 2.5 }>***</Text> }
                 >
                     { stores ? stores.map(store => (
                         <Box key={ store.id } textAlign="center" w="100%">
-                            <Heading as="h3" size="md" my={ 0 }>
+                            <Heading as="h3" my={ 0 } size="md">
                                 { RichText.asText(store.data.store_name) }
                             </Heading>
                             { store.data.opening_hours.map(period => (
@@ -107,12 +107,12 @@ const Home = () => {
                     <>
                         <Center w="100%">
                             <NewsPostCard
-                                alt={ newsPost[0].data.image.alt }
-                                heading={ RichText.asText(newsPost[0].data.title) }
                                 key={ newsPost[0].id }
+                                alt={ newsPost[0].data.image.alt }
+                                date={ newsPost[0].first_publication_date }
+                                heading={ RichText.asText(newsPost[0].data.title) }
                                 link={ linkResolver(newsPost[0]) }
                                 src={ newsPost[0].data.image.url }
-                                date={ newsPost[0].first_publication_date }
                                 type="news"
                             />
                         </Center>
