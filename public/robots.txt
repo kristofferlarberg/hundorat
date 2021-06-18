@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /*.svg$
+Sitemap: https://www.hundorat.se/sitemap.txt
