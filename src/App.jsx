@@ -18,7 +18,6 @@ import {
     NewsPost,
     NotFound,
     Page,
-    Preview,
     Stores,
     TextPost,
     Texts,
@@ -52,7 +51,6 @@ const App = () => {
                             <Route component={ Stores } exact path="/butiker" />
                             <Route component={ News } exact path="/nyheter" />
                             <Route component={ NewsPost } exact path="/nyheter/:uid" />
-                            <Route component={ Preview } exact path="/preview" />
                             <Route component={ Texts } exact path="/texter" />
                             <Route component={ TextPost } exact path="/texter/:uid" />
                             <Route component={ Activities } exact path="/ytterligare-aktivitet" />
