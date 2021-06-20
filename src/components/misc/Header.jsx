@@ -8,12 +8,9 @@ import {
     Drawer,
     DrawerBody,
     DrawerContent,
-    DrawerHeader,
     DrawerOverlay,
-    Flex,
     Heading,
     HStack,
-    Image,
     Link,
     StackDivider,
     Tooltip,
@@ -92,27 +89,23 @@ const Header = ({ contact, links }) => {
             <Drawer isOpen={ isOpen } onClose={ onClose } placement="top">
                 <DrawerOverlay>
                     <DrawerContent bgColor="floralwhite">
-                        <Flex justify="flex-end" w="100%">
-                            <Button borderRadius="full" h="50px" m={ 4 } onClick={ onClose } variant="transparent" w="50px">
-                                x
-                            </Button>
-                        </Flex>
-                        <DrawerHeader p="0">
-                            <Flex justify="center" w="100%">
-                                <Link as={ RouterLink } onClick={ onClose } to="/" variant="subtle">
-                                    <Image
-                                        alt="Hundlogotyp"
-                                        h="150px"
-                                        src="/images/hund.png"
-                                    />
-                                </Link>
-                            </Flex>
-                        </DrawerHeader>
-                        <DrawerBody>
+                        <Button
+                            borderRadius="full"
+                            h="50px"
+                            onClick={ onClose }
+                            position="absolute"
+                            right={ 2 }
+                            top={ 2 }
+                            variant="transparent"
+                            w="50px"
+                        >
+                            x
+                        </Button>
+                        <DrawerBody pb={ 0 } pt={ 8 } px={ 4 }>
                             <VStack
                                 align="stretch"
                                 divider={ <StackDivider borderColor="gray.800" /> }
-                                spacing={ 1 }
+                                spacing={ 0 }
                             >
                                 { links ? links.map(item => (
                                     <Link

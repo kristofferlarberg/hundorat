@@ -65,7 +65,8 @@ const Home = () => {
                 <Flex align="center" direction="column" w="100%">
                     <Flex
                         align="center"
-                        h="25rem"
+                        maxH="25rem"
+                        mb={ 4 }
                         overflow="hidden"
                         w={ ['100%', '100%', '90%', '70%', '60%', '60%'] }
                     >
@@ -76,12 +77,17 @@ const Home = () => {
                             w="100%"
                         />
                     </Flex>
-                    <Container maxW="container.sm">
+                    <Container maxW="container.sm" mb={ 12 }>
                         <RichText
                             linkResolver={ linkResolver }
                             render={ homepage.presentation }
                         />
                     </Container>
+                    <Image
+                        alt="Hundlogotyp"
+                        h="150px"
+                        src="/images/hund.png"
+                    />
                 </Flex>
                 <Divider />
                 <VStack
