@@ -21,7 +21,11 @@ const styles = {
             textTransform: 'uppercase',
         },
         a: {
-            color: 'red',
+            color: 'black',
+            textDecoration: 'underline 1px',
+            _hover: {
+                textDecoration: 'none',
+            },
         },
         ul: {
             marginBottom: ['1.125rem', 'null', '1.25rem'],

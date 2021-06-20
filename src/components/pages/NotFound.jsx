@@ -1,12 +1,23 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
+import {
+    Heading,
+    Text,
+} from '@chakra-ui/react';
 
 const NotFound = () => (
-    <div>
-        <h1>404</h1>
-        <h2>Document not found</h2>
-        <p><Link to="/">Return to homepage</Link></p>
-    </div>
+    <>
+        <Heading
+            as="h3"
+            size="md"
+            textAlign="center"
+        >
+            404: Document not found
+        </Heading>
+        <Text textAlign="center">
+            <Link to="/">Return to homepage</Link>
+        </Text>
+    </>
 );
 
 export default NotFound;
