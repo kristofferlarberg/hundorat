@@ -56,7 +56,7 @@ const App = () => {
                             <Route component={ Texts } exact path="/texter" />
                             <Route component={ TextPost } exact path="/texter/:uid" />
                             <Route component={ Activities } exact path="/ytterligare-aktivitet" />
-                            <Route component={ Page } exact path="/pages/:uid" />
+                            <Route component={ Page } exact path="/:uid" />
                         </MainLayout>
                         <Route component={ NotFound } />
                     </Switch>
