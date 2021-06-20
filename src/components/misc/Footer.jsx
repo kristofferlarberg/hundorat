@@ -19,9 +19,11 @@ const Footer = ({ contact }) => (
                 <Text align="center" fontSize="sm" my={ 0 }>
                     { contact.tel[0].text }
                 </Text>
-                <Link align="center" fontSize="sm" href={ `mailto: ${contact.email[0].text}` } my="0">
-                    { contact.email[0].text }
-                </Link>
+                <Text align="center" fontSize="sm" my={ 0 }>
+                    <Link href={ `mailto: ${contact.email[0].text}` }>
+                        { contact.email[0].text }
+                    </Link>
+                </Text>
             </Flex>
             <Image
                 alt="Svenska Antikvariatföreningen"

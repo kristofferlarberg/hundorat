@@ -24,10 +24,13 @@ const styles = {
             color: 'red',
         },
         ul: {
-            margin: ['1.125rem', '1.25rem'],
+            marginBottom: ['1.125rem', 'null', '1.25rem'],
+            marginLeft: '1.2rem',
+            marginTop: ['1.125rem', 'null', '1.25rem'],
         },
         li: {
-            margin: ['0.5rem', '0.6rem'],
+            marginBottom: ['0.5', 'null', '0.5rem'],
+            marginTop: ['0.5', 'null', '0.5rem'],
         },
     },
 };
