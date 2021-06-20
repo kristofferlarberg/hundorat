@@ -1,5 +1,4 @@
 import { ChakraProvider } from '@chakra-ui/react';
-import { Helmet } from 'react-helmet';
 import React from 'react';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
@@ -8,7 +7,6 @@ import {
     QueryClientProvider,
 } from 'react-query';
 
-import { apiEndpoint } from './prismic-configuration';
 import MainLayout from './components/layout/MainLayout';
 import theme from './theme';
 import {
@@ -30,19 +28,10 @@ import '@fontsource/spectral/700.css';
 import '@fontsource/spectral/400-italic.css';
 
 const App = () => {
-    const repoNameArray = /([^/]+)\.cdn.prismic\.io\/api/.exec(apiEndpoint);
-    const repoName = repoNameArray[1];
     const queryClient = new QueryClient();
 
     return (
         <QueryClientProvider client={ queryClient }>
-            <Helmet>
-                <script
-                    async
-                    defer
-                    src={ `//static.cdn.prismic.io/prismic.js?repo=${repoName}&new=true` }
-                />
-            </Helmet>
             <ChakraProvider theme={ theme }>
                 <BrowserRouter>
                     <Switch>

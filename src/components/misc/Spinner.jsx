@@ -12,7 +12,6 @@ const Spinner = () => (
     >
         <motion.div
             animate={{
-                backgroundColor: 'transparent',
                 rotate: [0, 360],
             }}
             transition={{
