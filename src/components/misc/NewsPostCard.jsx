@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+    Box,
     Heading,
     Image,
     Text,
@@ -21,14 +22,18 @@ const NewsPostCard = ({
 
     return (
         <BaseCard link={ link } type={ type }>
-            <VStack spacing={ 0.2 } w="100%">
-                <Image
-                    alt={ alt }
-                    mb={ 1.5 }
-                    onLoad={ handleLoad }
-                    src={ src }
-                    w="100%"
-                />
+            <VStack spacing={ 0 } w="calc(100% - 15px)">
+                <Box h="400px" mb={ 2 } overflow="hidden" w="100%">
+                    <Image
+                        alt={ alt }
+                        maxW="none"
+                        mb={ 1.5 }
+                        minH="100%"
+                        minW="100%"
+                        onLoad={ handleLoad }
+                        src={ src }
+                    />
+                </Box>
                 <Heading
                     as="h3"
                     size="md"
