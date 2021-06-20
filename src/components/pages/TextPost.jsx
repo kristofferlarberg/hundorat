@@ -38,7 +38,7 @@ const TextPost = ({ match }) => {
                     opacity={ pageContentStyle.opacity }
                     src={ textPost.image.url }
                 />
-            ) : null }
+            ) : 'Det finns inga inlägg för tillfället.' }
         </>
     );
 };
