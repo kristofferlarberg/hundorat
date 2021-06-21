@@ -5,7 +5,7 @@ const Button = {
     },
     variants: {
         images: {
-            backgroundColor: 'white',
+            backgroundColor: 'transparent',
             border: 0,
             borderRadius: 'sm',
             color: 'gray.800',

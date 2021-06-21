@@ -21,7 +21,7 @@ const BaseCard = ({ children, link, type }) => {
     }
     if (type === 'text') {
         card.color = 'floralwhite';
-        card.border = '1px';
+        card.border = '0';
         card.height = ['500px'];
         card.width = ['100%', '400px'];
     }

@@ -27,7 +27,7 @@ const Slider = ({ handleLoad, store }) => {
         <Box
             ref={ emblaRef }
             alignItems="center"
-            background="white"
+            background="floralwhite"
             justify="center"
             overflow="hidden"
             p={ 4 }
