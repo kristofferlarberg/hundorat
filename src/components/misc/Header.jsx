@@ -90,6 +90,7 @@ const Header = ({ contact, links }) => {
                 <DrawerOverlay>
                     <DrawerContent bgColor="floralwhite">
                         <Button
+                            aria-label="Stäng meny"
                             borderRadius="full"
                             h="50px"
                             onClick={ onClose }
@@ -101,7 +102,7 @@ const Header = ({ contact, links }) => {
                         >
                             x
                         </Button>
-                        <DrawerBody pb={ 0 } pt={ 8 } px={ 4 }>
+                        <DrawerBody aria-label="Meny" pb={ 0 } pt={ 8 } px={ 4 }>
                             <VStack
                                 align="stretch"
                                 divider={ <StackDivider borderColor="gray.800" /> }

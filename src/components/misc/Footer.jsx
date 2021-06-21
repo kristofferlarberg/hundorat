@@ -11,7 +11,7 @@ const Footer = ({ contact }) => (
     <>
         <Divider />
         <Flex align="center" as="footer" justify="space-between" mt={ 6 }>
-            <Image alt="International league of antiquarian booksellers" boxSize="60px" src="/images/ilogo.png" />
+            <Image alt="International league of antiquarian booksellers" h="60px" src="/images/ilogo.png" w="auto" />
             <Flex direction="column">
                 <Text align="center" fontSize="sm" my={ 0 }>
                     Antikvariat Hundörat
@@ -27,8 +27,9 @@ const Footer = ({ contact }) => (
             </Flex>
             <Image
                 alt="Svenska Antikvariatföreningen"
-                boxSize="60px"
+                h="60px"
                 src="/images/svaf_logo.png"
+                w="auto"
             />
         </Flex>
     </>

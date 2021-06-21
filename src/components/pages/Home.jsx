@@ -99,7 +99,7 @@ const Home = () => {
                                 { RichText.asText(store.data.store_name) }
                             </Heading>
                             { store.data.opening_hours.map(period => (
-                                <Text m="0">
+                                <Text key={ period.start_day } m="0">
                                     { period.start_day !== period.end_day
                                         ? `${period.start_day}–${period.end_day} ${period.start_time}.00–${period.end_time}.00`
                                         : `${period.start_day} ${period.start_time}.00–${period.end_time}.00` }

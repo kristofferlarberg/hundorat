@@ -27,17 +27,17 @@ const BaseCard = ({ children, link, type }) => {
     }
 
     return (
-        <Box
-            backgroundColor={ card.color }
-            border={ card.border }
-            borderColor="gray.800"
-            h={ card.height }
-            w={ card.width }
+        <Link
+            as={ RouterLink }
+            to={ link }
+            variant="subtle"
         >
-            <Link
-                as={ RouterLink }
-                to={ link }
-                variant="subtle"
+            <Box
+                backgroundColor={ card.color }
+                border={ card.border }
+                borderColor="gray.800"
+                h={ card.height }
+                w={ card.width }
             >
                 <Center
                     h="100%"
@@ -45,8 +45,8 @@ const BaseCard = ({ children, link, type }) => {
                 >
                     { children }
                 </Center>
-            </Link>
-        </Box>
+            </Box>
+        </Link>
     );
 };
 
