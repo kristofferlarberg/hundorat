@@ -56,7 +56,7 @@ const Slider = ({ handleLoad, store }) => {
                 )) }
             </Flex>
             { isLargerThan800 ? (
-                <HStack justify="center" mt={ 2 }>
+                <HStack justify="center" mt={ 4 }>
                     <Button
                         onClick={ scrollPrev }
                         variant="images"
