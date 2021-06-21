@@ -45,8 +45,8 @@ const Stores = () => {
                     </Heading>
                     <>
                         { stores.results.map(store => (
-                            <>
-                                <Slider key={ store.id } handleLoad={ () => handleLoad(stores.images_amount) } store={ store } />
+                            <Flex key={ store.id } align="center" direction="column" width="100%">
+                                <Slider handleLoad={ () => handleLoad(stores.images_amount) } store={ store } />
                                 <Box mb={ 12 } mt={ 6 } textAlign="center" w={ ['100%', '100%', '60%', '30%'] }>
                                     <Heading as="h3" m="0" size="md">
                                         { RichText.asText(store.data.store_name) }
@@ -61,7 +61,7 @@ const Stores = () => {
                                     </Box>
                                     <Box mt={ 4 }>
                                         { store.data.opening_hours.map(period => (
-                                            <Text m="0">
+                                            <Text key={ period.start_day } m="0">
                                                 { period.start_day !== period.end_day
                                                     ? `${period.start_day}–${period.end_day} ${period.start_time}–${period.end_time}`
                                                     : `${period.start_day} ${period.start_time}–${period.end_time}` }
@@ -76,7 +76,7 @@ const Stores = () => {
                                         </Box>
                                     ) : null }
                                 </Box>
-                            </>
+                            </Flex>
                         )) }
                     </>
                 </Flex>
