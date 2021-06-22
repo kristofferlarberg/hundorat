@@ -8,6 +8,7 @@ import {
 } from 'react-query';
 
 import MainLayout from './components/layout/MainLayout';
+import ScrollToTop from './utils/scrollToTop';
 import theme from './theme';
 import {
     Activities,
@@ -34,6 +35,7 @@ const App = () => {
         <QueryClientProvider client={ queryClient }>
             <ChakraProvider theme={ theme }>
                 <BrowserRouter>
+                    <ScrollToTop />
                     <Switch>
                         <MainLayout>
                             <Route component={ Home } exact path="/" />
